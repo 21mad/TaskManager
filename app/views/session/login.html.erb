@@ -1,0 +1,22 @@
+<h1>Добро пожаловать!</h1>
+<p>Войдите в свой аккаунт:</p>
+<%=form_with url: session_create_url, method: :post, local:true do |f|%>
+	<table id='login'>
+		<tr>
+			<td><label>Имя пользователя</label></td>
+			<td><%=f.text_field :username, require: true %><br/></td>
+		</tr>
+		<tr>
+			<td><label>Пароль</label></td>
+			<td><%=f.password_field :password, require: true%><br/></td>
+		</tr>
+		<tr>
+			<td><%=f.submit id: 'submit-btn', value: 'Вход',require: true%></td>
+		</tr>
+	</table>
+<%end%>
+<%unless flash[:notice].blank?%>
+  <h2 style = 'color:red'><%=flash[:notice]%></h2>
+<%end%>
+<p>Или зарегистрируйтесь:</p>
+<%=link_to 'Регистрация', new_user_path%>
