@@ -1,6 +1,6 @@
 <h1>Добро пожаловать!</h1>
-<p>Войдите в свой аккаунт:</p>
-<%=form_with url: session_create_url, method: :post, local:true do |f|%>
+<p>Для продолжения, войдите в свой аккаунт:</p>
+<%=form_with url: session_create_path, method: :post, local:true do |f|%>
 	<table id='login'>
 		<tr>
 			<td><label>Имя пользователя</label></td>

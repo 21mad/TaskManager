@@ -1,4 +1,5 @@
 class SessionController < ApplicationController
+  skip_before_action :require_login, only: %i[login create]
   def login
   end
   
@@ -18,7 +19,7 @@ class SessionController < ApplicationController
   end
 
   def logout
-    sign_out # Наш метод выхода, описанный в хелпере
+    sign_out
     redirect_to session_login_path
   end
 end
