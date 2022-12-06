@@ -9,6 +9,8 @@ class FoldersController < ApplicationController
 
   # GET /folders/1 or /folders/1.json
   def show
+    @task = Task.new
+    @tasks = @folder.tasks
   end
 
   # GET /folders/new

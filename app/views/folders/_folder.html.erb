@@ -5,8 +5,32 @@
   </p>
 
   <p>
-    <strong>User:</strong>
+    <strong>User ID:</strong>
     <%= folder.user_id %>
   </p>
+  
+  <% @tasks.each do |task| %>
+    <% if task.done == true %>
+      <strike><p><%= task.title %></p></strike>
+      <%= form_for task do |f| %>
+        <%= f.check_box :done, :value => task.done %>
+        <%= f.submit 'Вернуть' %>
+      <% end %>
+    <% elsif task.done == false %>
+      <p><%= task.title %></p>
+      <%= form_for task do |f| %>
+        <%= f.check_box :done, :value => task.done %>
+        <%= f.submit 'Выполнить' %>
+      <% end %>
+    <% end %>
+
+  <% end %>
+
+  <%= form_for @task do |f| %>
+    <p><%= f.text_field :title %></p>
+    <%= f.hidden_field :done, :value => false %>
+    <%= f.hidden_field :folder_id, :value => @folder.id %>
+    <%= f.submit 'Добавить задачу' %>
+  <% end %>
 
 </div>

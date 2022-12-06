@@ -5,5 +5,5 @@ class User < ApplicationRecord
     validates_presence_of :password
     validates_confirmation_of :password
 
-    has_many :folders
+    has_many :folders, dependent: :destroy
 end

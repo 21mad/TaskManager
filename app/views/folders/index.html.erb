@@ -4,11 +4,12 @@
 
 <div id="folders">
   <% @folders.each do |folder| %>
-    <%= render folder %>
     <p>
+      <%= folder.name %>
       <%= link_to "Show this folder", folder %>
     </p>
   <% end %>
 </div>
 
 <%= link_to "New folder", new_folder_path %>
+<%= link_to "Выйти из аккаунта", session_logout_path %>
