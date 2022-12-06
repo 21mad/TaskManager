@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  root 'session#login'
+  root 'folders#index'
+  #root 'session#login'
   get 'session/login'
   get 'session/logout'
   post 'session/create'
   resources :users
+  resources :folders
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Defines the root path route ("/")

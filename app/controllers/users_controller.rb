@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :require_login, only: %i[create new]
+  # добавить проверку на админа для всего кроме :new
 
   # GET /users or /users.json
   def index
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save
+        sign_in @user
         format.html { redirect_to root_path, notice: "User was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }

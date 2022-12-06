@@ -10,7 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_06_103514) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_06_131254) do
+  create_table "folders", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_folders_on_user_id"
+  end
+
+  create_table "tasks", force: :cascade do |t|
+    t.string "title"
+    t.boolean "done"
+    t.integer "folder_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["folder_id"], name: "index_tasks_on_folder_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
@@ -18,4 +35,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_06_103514) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "folders", "users"
+  add_foreign_key "tasks", "folders"
 end
