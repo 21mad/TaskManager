@@ -18,10 +18,15 @@
 
   <div>
     <%= form.label 'Пароль', style: "display: block" %>
-    <%= form.text_field :password_digest %>
+    <%= form.password_field :password %>
   </div>
 
   <div>
-    <%= form.submit 'Зарегистрироваться' %>
+    <%= form.label :lbl, value: 'Подтвердите пароль', style: "display: block" %>
+    <%= form.password_field :password_confirmation %>
+  </div>
+
+  <div>
+    <%= form.submit 'Зарегистрироваться', id: 'submit-btn' %>
   </div>
 <% end %>
