@@ -1,7 +1,8 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
   skip_before_action :require_login, only: %i[create new]
-  # добавить проверку на админа для всего кроме :new
+  # добавить проверку на админа для users, админ должен иметь доступ ко всему
+  # запретить дефолтным юзерам index, проверять users/id + users/id/edit (как с folder'ами)
 
   # GET /users or /users.json
   def index

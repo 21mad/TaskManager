@@ -1,7 +1,7 @@
 <div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
   <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-    <span class="fs-4">My Folders</span>
+    <span class="fs-6"><%= current_user.username + "'s" %> Folders</span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
@@ -22,12 +22,12 @@
     <li>
       <a href="#" class="nav-link text-white">
         <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-        Dashboard
+        not a folder
       </a>
     </li>
   </ul>
   <hr>
-  <p><%= button_to "New folder", new_folder_path, class: "btn btn-success", method: :get %></p>
+  <p><%= button_to "Create new folder", new_folder_path, class: "btn btn-success", method: :get %></p>
 </div>
 
 <div class="d-inline-flex flex-column bg-light" style="width: 85%; height: 100vh; overflow: auto">
@@ -64,6 +64,7 @@
     <div class="col-10">
       <p style="color: green"><%= notice %></p>
       <h1>Select a folder or create a new one!</h1>
+      <h1 style="color: red">Добавить дедлайны в модель tasks, обновление и удаление тасков</h1>
       <div class="text-center">
         <%= image_tag "https://www.pngmart.com/files/19/Smile-Emoticon-Transparent-PNG.png", alt: "smile_png" %>
       </div>

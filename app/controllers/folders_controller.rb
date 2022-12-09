@@ -1,10 +1,11 @@
 class FoldersController < ApplicationController
   before_action :set_folder, only: %i[ show edit update destroy ]
+  before_action :check_ownership, only: %i[ show edit update destroy ]
   #  skip_before_action :require_login # require_login doesn't work 
 
   # GET /folders or /folders.json
   def index
-    @folders = Folder.all
+    @folders = Folder.where(user_id: current_user.id)
   end
 
   # GET /folders/1 or /folders/1.json
@@ -69,5 +70,11 @@ class FoldersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def folder_params
       params.require(:folder).permit(:name, :user_id)
+    end
+
+    def check_ownership
+      unless @folder.user_id == current_user.id
+        redirect_to root_path
+      end
     end
 end
