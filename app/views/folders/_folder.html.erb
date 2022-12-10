@@ -1,36 +1,63 @@
 <div id="<%= dom_id folder %>">
-  <p>
-    <strong>Name:</strong>
-    <%= folder.name %>
-  </p>
 
-  <p>
-    <strong>User ID:</strong>
-    <%= folder.user_id %>
-  </p>
-  
-  <% @tasks.each do |task| %>
-    <% if task.done == true %>
-      <strike><p><%= task.title %></p></strike>
-      <%= form_for task do |f| %>
-        <%= f.check_box :done, :value => task.done %>
-        <%= f.submit 'Вернуть' %>
+  <table class="table" style="width: 100%">
+    <thead>
+      <tr>
+        <th scope="col">Complete</th>
+        <th scope="col">Title</th>
+        <th scope="col">Status</th>
+        <th scope="col">Deadline</th>
+        <th scope="col">Options</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @tasks.where(done: false).each_with_index do |task, index| %>
+        <tr>
+          <td scope="row">
+            <%= form_for task do |f| %>
+              <%= f.check_box :done, :value => task.done, class: "form-check-input" %>
+              <%= f.submit 'Do' %>
+            <% end %>
+          </td>
+          <td><b><%= task.title %></b></td>
+          <td><%= task.done %></td>
+          <td><%= task.deadline.to_formatted_s(:long_ordinal) %></td>
+          <td>edit|trash</td>
+        </tr>
       <% end %>
-    <% elsif task.done == false %>
-      <p><%= task.title %></p>
-      <%= form_for task do |f| %>
-        <%= f.check_box :done, :value => task.done %>
-        <%= f.submit 'Выполнить' %>
+      <% @tasks.where(done: true).each_with_index do |task, index| %>
+        <tr>
+          <td scope="row">
+            <%= form_for task do |f| %>
+              <%= f.check_box :done, :value => task.done, class: "form-check-input" %>
+              <%= f.submit 'Undo' %>
+            <% end %>
+          </td>
+          <td><s><%= task.title %></s></td>
+          <td><%= task.done %></td>
+          <td><%= task.deadline.to_formatted_s(:long_ordinal) %></td>
+          <td>edit|trash</td>
+        </tr>
       <% end %>
-    <% end %>
-
-  <% end %>
+      <%= form_for @task do |f| %>
+      <tr style="vertical-align: middle">
+        <td scope="row">add task example</td>
+        <td><%= f.text_field :title %></td>
+        <td></td>
+        <td><%= f.date_field :deadline, class: 'form-control' %></td>
+        <td>edit|trash</td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
 
   <%= form_for @task do |f| %>
+    <%= f.label :title, style: "display: block" %>
     <p style="color: red"><%= f.text_field :title %><%= flash[:error] %></p>
+    <%= f.date_field :deadline, class: 'form-control' %> 
     <%= f.hidden_field :done, :value => false %>
     <%= f.hidden_field :folder_id, :value => @folder.id %>
-    <%= f.submit 'Добавить задачу' %>
+    <%= f.submit 'Add task' %>
   <% end %>
 
 </div>
