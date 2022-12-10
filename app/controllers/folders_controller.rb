@@ -10,6 +10,7 @@ class FoldersController < ApplicationController
 
   # GET /folders/1 or /folders/1.json
   def show
+    @folders = Folder.where(user_id: current_user.id)
     @task = Task.new
     @tasks = @folder.tasks
   end

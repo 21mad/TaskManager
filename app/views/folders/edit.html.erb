@@ -1,4 +1,4 @@
-<h1>Editing folder</h1>
+<h1>Editing <%= @folder.name %></h1>
 
 <%= render "form", folder: @folder %>
 <p>Перенести удаление из show this folder</p>
@@ -6,6 +6,7 @@
 <br>
 
 <div>
-  <%= link_to "Show this folder", @folder %> |
+  <%= button_to "Delete this folder", @folder, method: :delete %>|
+  <%= link_to "Back to this folder", @folder %> |
   <%= link_to "Back to folders", folders_path %>
 </div>
