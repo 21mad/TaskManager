@@ -27,7 +27,7 @@
   <% end %>
 
   <%= form_for @task do |f| %>
-    <p><%= f.text_field :title %></p>
+    <p style="color: red"><%= f.text_field :title %><%= flash[:error] %></p>
     <%= f.hidden_field :done, :value => false %>
     <%= f.hidden_field :folder_id, :value => @folder.id %>
     <%= f.submit 'Добавить задачу' %>

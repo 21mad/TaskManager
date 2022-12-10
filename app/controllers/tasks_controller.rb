@@ -4,7 +4,8 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to folder_path(@task.folder_id)
     else
-      redirect_to root_path
+      flash[:error] = 'The task title cannot be empty :('
+      redirect_to folder_path(@task.folder_id)
     end
   end
 

@@ -57,8 +57,9 @@
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 60px">
     <div class="col-10">
       <p style="color: green"><%= notice %></p>
-      <h1>Select a folder or create a new one!</h1>
-      <h1 style="color: red">Добавить дедлайны в модель tasks, обновление и удаление тасков</h1>
+      <h1>Hello, <%= current_user.username %>!</h1>
+      <h1>Select an existing folder or <a href="/folders/new" style="color: green">create</a> a new one!</h1>
+      <h1 style="color: red">Добавить дедлайны в модель tasks, обновление и удаление тасков, добавить поле Description для папки</h1>
       <div class="text-center">
         <%= image_tag "https://www.pngmart.com/files/19/Smile-Emoticon-Transparent-PNG.png", alt: "smile_png" %>
       </div>
