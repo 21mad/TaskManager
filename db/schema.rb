@@ -10,12 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_06_131254) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_111742) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "description"
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 

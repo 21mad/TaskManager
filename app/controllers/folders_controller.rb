@@ -70,7 +70,7 @@ class FoldersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def folder_params
-      params.require(:folder).permit(:name, :user_id)
+      params.require(:folder).permit(:name, :user_id, :description)
     end
 
     def check_ownership
