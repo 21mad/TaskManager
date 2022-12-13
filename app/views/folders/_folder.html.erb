@@ -22,7 +22,7 @@
           <td><b><%= task.title %></b></td>
           <td><%= task.done %></td>
           <td><%= task.deadline.to_formatted_s(:long_ordinal) %></td>
-          <td>edit|trash</td>
+          <td>edit|<%= button_to "delete", task, method: :delete %></td>
         </tr>
       <% end %>
       <% @tasks.where(done: true).each_with_index do |task, index| %>
@@ -36,7 +36,7 @@
           <td><s><%= task.title %></s></td>
           <td><%= task.done %></td>
           <td><%= task.deadline.to_formatted_s(:long_ordinal) %></td>
-          <td>edit|trash</td>
+          <td>edit|<%= button_to "delete", task, method: :delete %></td>
         </tr>
       <% end %>
       <%= form_for @task do |f| %>
@@ -45,7 +45,7 @@
         <td><%= f.text_field :title %></td>
         <td></td>
         <td><%= f.date_field :deadline, class: 'form-control' %></td>
-        <td>edit|trash</td>
+        <td>edit|delete</td>
       </tr>
       <% end %>
     </tbody>

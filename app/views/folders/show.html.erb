@@ -62,20 +62,11 @@
       <p style="color: green"><%= notice %></p>
       <h1><%= @folder.name %>'s tasks</h1>
       <h4 style="font-style: italic"><%= @folder.description %></h4>
-      <h1 style="color: red">Добавить обновление и удаление тасков</h1>
+      <h1 style="color: red">Добавить обновление тасков. Добавление задач сверху. </h1>
       
       <p style="color: green"><%= notice %></p>
 
       <%= render @folder %>
-
-      <p>Перенести кнопку удаления в edit, мб убрать edit this folder, добавление задач либо в таблице последней строкой, либо сверху</p>
-      <p>Скопировать индекс, но срендерить таблицу тасков данной папки, закрасить кнопку на сайд баре, название папки рядом с иконкой</p>
-      <div>
-        <%= link_to "Edit this folder", edit_folder_path(@folder) %> |
-        <%= link_to "Back to folders", folders_path %>
-
-        <%= button_to "Destroy this folder", @folder, method: :delete %>
-      </div>
     </div>
   </div>
 </div>
