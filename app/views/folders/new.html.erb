@@ -1,9 +1,59 @@
-<h1>New folder</h1>
-
-<%= render "form", folder: @folder %>
-
-<br>
-
-<div>
-  <%= link_to "Back to folders", folders_path %>
+<div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    <span class="fs-6"><%= current_user.username + "'s" %> Folders</span>
+  </a>
+  <hr>
+  <ul class="nav nav-pills flex-column mb-auto">
+    <% @folders.each do |folder|%>
+    <li>
+      <div class="nav-link">
+        <%= link_to image_tag('logos/settings-16.png'), url_for("/folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+        <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
+      </div>
+    </li>
+    <% end %>
+  </ul>
+  <hr>
+  <p><%= button_to "Create new folder", new_folder_path, class: "btn btn-success", method: :get %></p>
 </div>
+
+<div class="d-inline-flex flex-column bg-light" style="width: 85%; height: 100vh; overflow: auto">
+  <div class="header" style="position: fixed; width: 85%; top: 0">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2" style="height: 125%">
+      <div class="container-fluid">
+        <img src="https://findicons.com/files/icons/732/snow_leopard/256/folder_folder.png" alt="Logo" style="width: 30px; height: 30px; margin-right: 10px">
+        <%= link_to "New folder", "/folders/new", class: "navbar-brand" %>
+        <a class="navbar-brand" style="color: green"><%= notice %></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ms-auto ">
+            <li class="nav-item">
+              <a class="nav-link mx-2 active" aria-current="page" href="#">My Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link mx-2" href="#">Analytics</a>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Account", "/users/#{current_user.id}" , class: "nav-link mx-2"%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Logout", session_logout_path, class: "nav-link mx-2" %>
+            </li>
+          </ul>
+        </div> 
+      </div>
+    </nav>
+  </div>
+
+  <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 60px">
+    <div class="col-10">
+      <h1>New folder</h1>
+      <%= render "form", folder: @folder %>
+    </div>
+  </div>
+</div>
+

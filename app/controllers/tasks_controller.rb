@@ -13,7 +13,7 @@ class TasksController < ApplicationController
     if @task.save
       redirect_to folder_path(@task.folder_id)
     else
-      flash[:error] = 'The task title cannot be empty :('
+      flash[:error] = 'The task title and deadline cannot be empty :('
       redirect_to folder_path(@task.folder_id)
     end
   end

@@ -6,7 +6,7 @@
         <td><%= f.text_field :title, class: 'form-control', placeholder: 'Write your task here...' %></td>
         <td style="text-align: right"><b><%= f.label :deadline, style: "display: block" %><b></td>
         <td><%= f.date_field :deadline, class: 'form-control' %></td>
-        <td><%= f.submit 'Add task' %></td>
+        <td><%= f.submit 'Add task', class: 'btn btn-secondary'%></td>
         <td><%= f.hidden_field :done, :value => false %></td>
         <td><%= f.hidden_field :folder_id, :value => @folder.id %></td>
       </tr>
@@ -29,13 +29,13 @@
       <% @tasks.where(done: false).order(deadline: :asc).each_with_index do |task, index| %>
         <% days = (task.deadline - Date.today).to_i %>
         <% if days >= 7 %>
-          <% bg_color = 'lawngreen' %>
+          <% bg_color = '' %>
         <% elsif days >= 3 %>
-          <% bg_color = 'yellow' %>
+          <% bg_color = '#C6D8D3' %>
         <% elsif days >= 1 %>
-          <% bg_color = 'tomato' %>
+          <% bg_color = '#F0544F' %>
         <% else %>
-          <% bg_color = 'firebrick' %>
+          <% bg_color = '#D81E5B' %>
         <% end %>
         <tr style="vertical-align: middle; background-color: <%= bg_color %>">
           <td scope="row">

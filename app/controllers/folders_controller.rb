@@ -17,11 +17,13 @@ class FoldersController < ApplicationController
 
   # GET /folders/new
   def new
+    @folders = Folder.where(user_id: current_user.id)
     @folder = Folder.new
   end
 
   # GET /folders/1/edit
   def edit
+    @folders = Folder.where(user_id: current_user.id)
   end
 
   # POST /folders or /folders.json
