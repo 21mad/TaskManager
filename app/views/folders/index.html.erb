@@ -59,52 +59,10 @@
     <div class="col-10">
       <h1>Hello, <%= current_user.username %>!</h1>
       <h1>Select an existing folder or <a href="/folders/new" style="color: green">create</a> a new one!</h1>
-      <h1 style="color: red">Добавить дедлайны в модель tasks, обновление и удаление тасков, добавить поле Description для папки</h1>
+      <h1 style="color: red">Добавить обновление тасков</h1>
       <div class="text-center">
-        <%= image_tag "https://www.pngmart.com/files/19/Smile-Emoticon-Transparent-PNG.png", alt: "smile_png" %>
+        <%= image_tag 'logos/home_smile.png', alt: "smile_png" %>
       </div>
-
-      <div id="folders">
-        <% @folders.each do |folder| %>
-          <p>
-            <%= folder.name %>
-            <%= link_to "Show this folder", folder %>
-          </p>
-        <% end %>
-      </div>
-
-      <%= link_to "New folder", new_folder_path %>
-      <%= link_to "Выйти из аккаунта", session_logout_path %>
-      <table class="table" style="width: 100%">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </div>

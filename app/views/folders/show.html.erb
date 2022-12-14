@@ -59,13 +59,24 @@
 
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 60px">
     <div class="col-10">
-      <p style="color: green"><%= notice %></p>
-      <h1><%= @folder.name %>'s tasks</h1>
-      <h4 style="font-style: italic"><%= @folder.description %></h4>
-      <h1 style="color: red">Добавить обновление тасков. Добавление задач сверху. </h1>
-      
-      <p style="color: green"><%= notice %></p>
-
+      <div class="row" style="margin-top: 20px; margin-bottom: 10px">
+        <div class="col-6">
+          <h1><%= @folder.name %>'s tasks</h1>
+          <h4 style="font-style: italic"><%= @folder.description %></h4>
+          <p style="color: green"><%= notice %></p>
+        </div>
+        <div class="col-6" style="text-align: right">
+          <h1>Current progress</h1>
+          <% tasks_done = @tasks.count { |t| t.done == true} %>
+          <% tasks_total = @tasks.count %>
+          <% percent = 0 %>
+          <% percent = ((tasks_done / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
+          <div class="progress" style="margin-top: 16px">
+            <div class="progress-bar" role="progressbar" style="width: <%= percent %>%; background-color: lightgreen; color: black" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"><b><%= percent %>%</b></div>
+          </div>
+          <div><%= tasks_done %>/<%= tasks_total %></div>
+        </div>
+      </div>
       <%= render @folder %>
     </div>
   </div>
