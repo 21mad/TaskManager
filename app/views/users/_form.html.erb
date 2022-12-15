@@ -12,21 +12,24 @@
   <% end %>
 
   <div>
-    <%= form.label 'Имя пользователя', style: "display: block" %>
-    <%= form.text_field :username %>
+    <%= form.label 'User name', style: "display: block" %>
+    <%= form.text_field :username, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label 'Пароль', style: "display: block" %>
-    <%= form.password_field :password %>
+    <%= form.label 'Password', style: "display: block" %>
+    <%= form.password_field :password, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :lbl, value: 'Подтвердите пароль', style: "display: block" %>
-    <%= form.password_field :password_confirmation %>
+    <%= form.label :lbl, value: 'Confirm password', style: "display: block" %>
+    <%= form.password_field :password_confirmation, class: "form-control" %>
   </div>
-
-  <div>
-    <%= form.submit 'Зарегистрироваться', id: 'submit-btn' %>
+  <div style="margin-top: 20px">
+    <% btn_title = 'Register' %>
+    <% unless current_user.nil? %>
+      <% btn_title = 'Update' %>
+    <% end %>
+    <%= form.submit btn_title, id: 'submit-btn', class: "btn btn-success" %>
   </div>
 <% end %>

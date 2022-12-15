@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @folders = Folder.where(user_id: current_user.id)
   end
 
   # GET /users/new
@@ -38,13 +39,16 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1 or /users/1.json
   def update
-    respond_to do |format|
+    @folders = Folder.where(user_id: current_user.id)
       if @user.update(user_params)
-        format.html { redirect_to user_url(@user), notice: "User was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
+        redirect_to user_url(@user), notice: "User was successfully updated."
+      elsif !current_user.nil?
+        flash[:error] = 'The task title and deadline cannot be empty :('
+        # redirect_to user_url(@user) , status: :unprocessable_entity
+        render :show, status: :unprocessable_entity
+      else 
+        redirect_to new_user_path, status: :unprocessable_entity
       end
-    end
   end
 
   # DELETE /users/1 or /users/1.json
