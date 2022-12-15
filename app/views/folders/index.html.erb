@@ -34,9 +34,11 @@
             <li class="nav-item">
               <a class="nav-link mx-2 active" aria-current="page" href="#">My Tasks</a>
             </li>
+            <% if current_user.id == 6 %>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="#">Analytics</a>
+              <a class="nav-link mx-2" href="/users">All Users</a>
             </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to "Account", "users/#{current_user.id}" , class: "nav-link mx-2"%>
             </li>
@@ -53,7 +55,7 @@
     <div class="col-10">
       <h1>Hello, <%= current_user.username %>!</h1>
       <h1>Choose an existing folder or <a href="/folders/new" style="color: green">create</a> a new one!</h1>
-      <h1 style="color: red">Добавить обновление тасков</h1>
+      <h1 style="color: red">Добавить обновление тасков, информацию про цвет?</h1>
       <div class="text-center">
         <%= image_tag 'logos/home_smile.png', alt: "smile_png" %>
       </div>

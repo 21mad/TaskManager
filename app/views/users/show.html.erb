@@ -22,8 +22,8 @@
   <div class="header" style="position: fixed; width: 85%; top: 0">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2" style="height: 125%">
       <div class="container-fluid">
-        <%# <a class="navbar-brand" href="#">Logo</a> %>
         <img src="https://findicons.com/files/icons/732/snow_leopard/256/folder_folder.png" alt="Logo" style="width: 30px; height: 30px; margin-right: 10px">
+        <% if current_user.id == 6 %><a class="navbar-brand"><%= @user.username %>'s account</a><% end %>
         <a class="navbar-brand" style="color: green"><%= notice %></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -34,9 +34,11 @@
             <li class="nav-item">
               <a class="nav-link mx-2" aria-current="page" href="/">My Tasks</a>
             </li>
+            <% if current_user.id == 6 %>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="#">Analytics</a>
+              <a class="nav-link mx-2" href="/users">All Users</a>
             </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to "Account", "/users/#{current_user.id}" , class: "nav-link mx-2 active"%>
             </li>
@@ -66,6 +68,7 @@
       <div style= "margin-top: 20px">
         <%= button_to "Delete this account", @user, method: :delete, class: "btn btn-danger" %>
       </div>
+      <p style="color: red"><%= flash[:alert] %></p>
     </div>
   </div>
 </div>

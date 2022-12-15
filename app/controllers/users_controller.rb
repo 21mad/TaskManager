@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
   before_action :set_user, only: %i[ show edit update destroy ]
+  before_action :check_access, only: %i[ show edit update destroy] # редирект если current_user не админ и не set_user
+  before_action :stay_admin, only: :destroy # нельзя удалить аккаунт админа
   skip_before_action :require_login, only: %i[create new]
   # добавить проверку на админа для users, админ должен иметь доступ ко всему
   # запретить дефолтным юзерам index, проверять users/id + users/id/edit (как с folder'ами)
 
   # GET /users or /users.json
   def index
+    redirect_to root_path unless current_user.id == 6
+    @folders = Folder.where(user_id: current_user.id)
     @users = User.all
   end
 
@@ -56,7 +60,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "User was successfully destroyed." }
+      format.html { redirect_to users_url, notice: "Account was successfully deleted." }
     end
   end
 
@@ -69,5 +73,13 @@ class UsersController < ApplicationController
     # Only allow a list of trusted parameters through.
     def user_params
       params.require(:user).permit(:username, :password, :password_confirmation)
+    end
+
+    def check_access
+      redirect_to root_path if (current_user.id != 6)&&(current_user != set_user)
+    end
+
+    def stay_admin
+      redirect_to user_path, alert: "You're admin!" if current_user.id == 6
     end
 end

@@ -34,9 +34,11 @@
             <li class="nav-item">
               <a class="nav-link mx-2 active" aria-current="page" href="#">My Tasks</a>
             </li>
+            <% if current_user.id == 6 %>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="#">Analytics</a>
+              <a class="nav-link mx-2" href="/users">All Users</a>
             </li>
+            <% end %>
             <li class="nav-item">
               <%= link_to "Account", "/users/#{current_user.id}" , class: "nav-link mx-2"%>
             </li>
