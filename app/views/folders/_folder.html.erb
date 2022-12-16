@@ -1,4 +1,4 @@
-<div id="<%= dom_id folder %>">
+<div id="<%= dom_id folder %>" class="border rounded">
   <table class="table" style="width: 100%">
       <%= form_for @task do |f| %>
       <tr style="vertical-align: middle">
@@ -29,15 +29,15 @@
       <% @tasks.where(done: false).order(deadline: :asc).each_with_index do |task, index| %>
         <% days = (task.deadline - Date.today).to_i %>
         <% if days >= 7 %>
-          <% bg_color = '' %>
+          <% bg_color = '-grey' %>
         <% elsif days >= 3 %>
-          <% bg_color = '#C6D8D3' %>
+          <% bg_color = '-yellow' %>
         <% elsif days >= 0 %>
-          <% bg_color = '#F0544F' %>
+          <% bg_color = '-orange' %>
         <% else %>
-          <% bg_color = '#D81E5B' %>
+          <% bg_color = '-red' %>
         <% end %>
-        <tr style="vertical-align: middle; background-color: <%= bg_color %>">
+        <tr style="vertical-align: middle">
           <td scope="row">
             <%= form_for task do |f| %>
               <%= f.check_box :done, :value => task.done, class: "form-check-input" %>
@@ -45,7 +45,7 @@
             <% end %>
           </td>
           <td><b><%= task.title %></b></td>
-          <td><%= image_tag 'logos/in-progress.png', style: "width: 20px; height: 20px" %></td>
+          <td><%= image_tag 'logos/in-progress.png', style: "width: 20px; height: 20px" %><span class="dot<%= bg_color %>"></span></td>
           <td><%= task.deadline.to_formatted_s(:rfc822) %></td>
           <td>
             <% if days == 1 %>
