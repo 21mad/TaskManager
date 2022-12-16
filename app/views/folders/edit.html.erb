@@ -62,8 +62,9 @@
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 80px">
     <div class="col-6 border rounded">
     <h1>Editing <%= @folder.name %></h1>
+    <p style="color: red"><%= flash[:error] %></p>
 
-    <%= render "form", folder: @folder %>
+    <%= render "form", folder: @folder, colors: @colors %>
 
     <div class="row" style="margin-top: 30px">
       <h5>Do you want to <u style="color: red">delete</u> this folder?<h5>

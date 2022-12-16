@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_10_113626) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_16_134543) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.text "colors", default: "{\"red\":0,\"orange\":3,\"yellow\":7}"
     t.index ["user_id"], name: "index_folders_on_user_id"
   end
 
@@ -26,7 +27,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_113626) do
     t.integer "folder_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "deadline", null: false
+    t.date "deadline"
     t.index ["folder_id"], name: "index_tasks_on_folder_id"
   end
 

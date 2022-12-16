@@ -54,7 +54,8 @@
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 60px">
     <div class="col-10">
       <h1>New folder</h1>
-      <%= render "form", folder: @folder %>
+      <p style="color: red"><%= flash[:error] %></p>
+      <%= render "form", folder: @folder, colors: {"red"=>0, "orange"=>3, "yellow"=>7} %>
     </div>
   </div>
 </div>

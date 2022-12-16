@@ -28,14 +28,14 @@
     <tbody>
       <% @tasks.where(done: false).order(deadline: :asc).each_with_index do |task, index| %>
         <% days = (task.deadline - Date.today).to_i %>
-        <% if days >= 7 %>
-          <% bg_color = '-grey' %>
-        <% elsif days >= 3 %>
-          <% bg_color = '-yellow' %>
-        <% elsif days >= 0 %>
-          <% bg_color = '-orange' %>
-        <% else %>
+        <% if days < @colors['red']  %>
           <% bg_color = '-red' %>
+        <% elsif days < @colors['orange'] %>
+          <% bg_color = '-orange' %>
+        <% elsif days < @colors['yellow'] %>
+          <% bg_color = '-yellow' %>
+        <% else %>
+          <% bg_color = '-grey' %>
         <% end %>
         <tr style="vertical-align: middle">
           <td scope="row">
