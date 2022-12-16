@@ -59,8 +59,11 @@
     </nav>
   </div>
 
+  <% tasks_done = @tasks.count { |t| t.done == true} %>
+  <% tasks_total = @tasks.count %>
+  <% celebration = "bg-confetti-animated" if tasks_total == tasks_done %>
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 60px">
-    <div class="col-10">
+    <div class="col-10 <%= celebration %>">
       <div class="row" style="margin-top: 20px; margin-bottom: 10px">
         <div class="col-6">
           <h1><%= @folder.name %>'s tasks</h1>
@@ -69,8 +72,6 @@
         </div>
         <div class="col-6" style="text-align: right">
           <h1>Current progress</h1>
-          <% tasks_done = @tasks.count { |t| t.done == true} %>
-          <% tasks_total = @tasks.count %>
           <% percent = 0 %>
           <% percent = ((tasks_done / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
           <div class="progress" style="margin-top: 16px">

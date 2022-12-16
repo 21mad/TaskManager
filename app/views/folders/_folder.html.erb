@@ -37,11 +37,11 @@
         <% else %>
           <% bg_color = '-grey' %>
         <% end %>
-        <tr style="vertical-align: middle">
+        <tr style="vertical-align: middle" id="row<%= task.id %>">
           <td scope="row">
             <%= form_for task do |f| %>
-              <%= f.check_box :done, :value => task.done, class: "form-check-input" %>
-              <%= f.submit 'Do' %>
+              <%= f.check_box :done, :value => task.done, class: "form-check-input", checked: "checked", hidden: "hidden" %>
+              <%= f.submit 'Do', class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %>
             <% end %>
           </td>
           <td><b><%= task.title %></b></td>
@@ -60,11 +60,11 @@
         </tr>
       <% end %>
       <% @tasks.where(done: true).order(deadline: :asc).each_with_index do |task, index| %>
-        <tr style="vertical-align: middle; background-color: lightgreen">
+        <tr style="vertical-align: middle; background-color: lightgreen" id="row<%= task.id %>">
           <td scope="row">
             <%= form_for task do |f| %>
-              <%= f.check_box :done, :value => task.done, class: "form-check-input" %>
-              <%= f.submit 'Undo' %>
+              <%= f.check_box :done, :value => task.done, class: "form-check-input", checked: "", hidden: "hidden" %>
+              <%= f.submit 'Undo', class: "btn btn-outline-dark", style: "line-width: 15px; line-height: 15px" %>
             <% end %>
           </td>
           <td><s><%= task.title %></s></td>

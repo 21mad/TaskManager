@@ -21,7 +21,7 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to folder_path(@task.folder_id)
+      redirect_to "/folders/#{@task.folder_id}/#row#{@task.id}"
     else
       redirect_to root_path
     end
