@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_16_134543) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_17_102033) do
   create_table "folders", force: :cascade do |t|
     t.string "name"
     t.integer "user_id", null: false
@@ -36,6 +36,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_16_134543) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
   end
 
   add_foreign_key "folders", "users"

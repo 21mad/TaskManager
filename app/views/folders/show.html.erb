@@ -9,14 +9,14 @@
       <% if folder == @folder %>
         <li>
           <div class="nav-link active">
-            <%= link_to image_tag('logos/settings-16.png'), url_for("#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+            <%= link_to image_tag('logos/settings-16.png'), url_for("/folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
             <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
           </div>
         </li>
       <% else %>
         <li>
           <div class="nav-link">
-            <%= link_to image_tag('logos/settings-16.png'), url_for("#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+            <%= link_to image_tag('logos/settings-16.png'), url_for("/folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
             <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
           </div>
         </li>
@@ -61,7 +61,7 @@
 
   <% tasks_done = @tasks.count { |t| t.done == true} %>
   <% tasks_total = @tasks.count %>
-  <% celebration = "bg-confetti-animated" if tasks_total == tasks_done %>
+  <% celebration = "bg-confetti-animated" if ((tasks_total == tasks_done) && !tasks_total.zero?) %>
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 60px">
     <div class="col-10 <%= celebration %>">
       <div class="row" style="margin-top: 20px; margin-bottom: 10px">
