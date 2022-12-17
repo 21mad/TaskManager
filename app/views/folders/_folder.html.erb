@@ -1,4 +1,4 @@
-<div id="<%= dom_id folder %>" class="border rounded">
+<div id="<%= dom_id folder %>" class="border rounded" style="margin-bottom: 30px;">
   <table class="table" style="width: 100%">
       <%= form_for @task do |f| %>
       <tr style="vertical-align: middle">
@@ -56,7 +56,7 @@
               <%= days.abs %> days overdue
             <% end %>
           </td>
-          <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete %></td>
+          <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete, class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %></td>
         </tr>
       <% end %>
       <% @tasks.where(done: true).order(deadline: :asc).each_with_index do |task, index| %>
@@ -71,11 +71,11 @@
           <td><%= image_tag 'logos/done.png', style: "width: 20px; height: 20px" %></td>
           <td><%= task.deadline.to_formatted_s(:rfc822) %></td>
           <td></td>
-          <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete %></td>
+          <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete, class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %></td>
         </tr>
       <% end %>
       <%= form_for @task do |f| %>
-      <tr style="vertical-align: middle">
+      <tr style="vertical-align: middle" hidden="hidden"> 
         <td scope="row">edit task example</td>
         <td><%= f.text_field :title %></td>
         <td></td>
