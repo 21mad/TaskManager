@@ -42,6 +42,7 @@
             <%= form_for task do |f| %>
               <%= f.check_box :done, :value => task.done, class: "form-check-input", checked: "checked", hidden: "hidden" %>
               <%= f.submit 'Do', class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %>
+              <%= f.text_field :done_by, value: current_user.username, hidden: "hidden" %>
             <% end %>
           </td>
           <td><b><%= task.title %></b></td>
@@ -65,6 +66,7 @@
             <%= form_for task do |f| %>
               <%= f.check_box :done, :value => task.done, class: "form-check-input", checked: "", hidden: "hidden" %>
               <%= f.submit 'Undo', class: "btn btn-outline-dark", style: "line-width: 15px; line-height: 15px" %>
+              <%= f.text_field :done_by, value: "", hidden: "hidden"%>
             <% end %>
           </td>
           <td><s><%= task.title %></s></td>
