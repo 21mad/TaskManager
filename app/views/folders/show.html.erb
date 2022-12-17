@@ -80,7 +80,44 @@
           <div><%= tasks_done %>/<%= tasks_total %></div>
         </div>
       </div>
-      <%= render @folder %>
+      <% unless tasks_total.zero? %>
+        <%= render @folder %>
+      <% else %>
+        <div class="border rounded">
+          <table class="table" style="width: 100%">
+            <%= form_for @task do |f| %>
+            <tr style="vertical-align: middle">
+              <td scope="row" style="text-align: right"><b><%= f.label :title, style: "display: block" %></b></td>
+              <td><%= f.text_field :title, class: 'form-control', placeholder: 'Write your task here...' %></td>
+              <td style="text-align: right"><b><%= f.label :deadline, style: "display: block" %><b></td>
+              <td><%= f.date_field :deadline, class: 'form-control' %></td>
+              <td><%= f.submit 'Add task', class: 'btn btn-secondary'%></td>
+              <td><%= f.hidden_field :done, :value => false %></td>
+              <td><%= f.hidden_field :folder_id, :value => @folder.id %></td>
+            </tr>
+            <% end %>
+          </table>
+
+          <table class="table" style="width: 100%">
+            <thead>
+              <tr>
+                <th scope="col">Complete</th>
+                <th scope="col">Title</th>
+                <th scope="col">Status</th>
+                <th scope="col">Deadline</th>
+                <th scope="col">Time Left</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-color: #f8f9fa">
+                <td colspan="6" style="text-align: center"><h4 style="height: 250px; margin-top: 30px">This folder is empty :(<br/> Add some tasks.</h4></td>
+              </tr>
+            </tbody>
+          </table>
+            
+        </div>
+      <% end %>
     </div>
   </div>
 </div>
