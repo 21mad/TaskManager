@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :public_folders
   root 'folders#index'
   #root 'session#login'
   get 'session/login'

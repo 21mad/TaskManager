@@ -1,0 +1,2 @@
+module PublicFoldersHelper
+end

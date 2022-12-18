@@ -1,7 +1,6 @@
 class FoldersController < ApplicationController
   before_action :set_folder, only: %i[ show edit update destroy ]
   before_action :check_ownership, only: %i[ show edit update destroy ]
-  #  skip_before_action :require_login # require_login doesn't work 
 
   # GET /folders or /folders.json
   def index
