@@ -1,7 +1,7 @@
 <div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
   <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-    <span class="fs-6"><%= current_user.username + "'s" %> Folders</span>
+    <span class="fs-6"><%= current_user.username %>'s folders</span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
@@ -35,7 +35,7 @@
               <a class="nav-link mx-2" aria-current="page" href="/public_folders">Public Tasks</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-2 active" aria-current="page" href="#">My Tasks</a>
+              <a class="nav-link mx-2 active" aria-current="page" href="/folders">My Tasks</a>
             </li>
             <% if current_user.id == 6 %>
             <li class="nav-item">
@@ -58,9 +58,8 @@
     <div class="col-10">
       <h1>Hello, <%= current_user.username %>!</h1>
       <h1>Choose an existing folder or <a href="/folders/new" style="color: green">create</a> a new one!</h1>
-      <h1 style="color: red">Добавить на всех /folders ссылку на общие таски</h1>
       <div class="text-center">
-        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 500px; width: 500px" %>
+        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 450px; width: 450px" %>
       </div>
     </div>
   </div>

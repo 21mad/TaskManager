@@ -1,9 +1,9 @@
 class PublicFoldersController < ApplicationController
-  before_action :set_public_folder, only: %i[ show edit update destroy add_member ]
-  before_action :set_owning_folders, only: %i[ index show new edit add_member ] # ownership for side bar mapping
-  before_action :set_membering_folders, only: %i[ index show new edit add_member ] # membership for side bar mapping
-  # add check_ownership for create, update, delete - only owner can change info - add flash[:notice] = 'You should be an owner to do that.'
-  # add check_membership for show, edit, add_member - member can see info
+  before_action :set_public_folder, only: %i[ show edit update destroy check_ownership ]
+  before_action :set_owning_folders, only: %i[ index show new edit ] # ownership for side bar mapping
+  before_action :set_membering_folders, only: %i[ index show new edit ] # membership for side bar mapping
+  before_action :check_ownership, only: %i[ update delete edit ] # - only owner can change info
+  before_action :check_membership, only: %i[ show edit ] # only member AND owners can do tasks in public folder
 
   # GET /public_folders or /public_folders.json
   def index
@@ -49,8 +49,39 @@ class PublicFoldersController < ApplicationController
     yellow = params[:public_folder][:yellow].to_i
     colors = { "red" => red, "orange" => orange, "yellow" => yellow }
     colors_json = ActiveSupport::JSON::encode(colors)
+    if (!(red < orange) || !(orange < yellow))
+      flash[:error] = 'Wrong color settings.'
+      redirect_to new_public_folder_path
+      return
+    end
 
-    @public_folder = PublicFolder.new(name: params[:public_folder][:name], user_id: params[:public_folder][:user_id], description: params[:public_folder][:description], colors: colors_json, members: params[:public_folder][:members])
+    @members = [] # empty array of member names
+
+    new_member_name = params[:public_folder][:new_member_name]
+    if (!(User.find_by_username(new_member_name)) && (new_member_name != "")) || (new_member_name == current_user.username)
+      flash[:error] = 'User to add not found.'
+      redirect_to new_public_folder_path
+      return
+    end
+
+    if @members.include?(new_member_name)
+      flash[:error] = 'User to add is already in member list.'
+      redirect_to new_public_folder_path
+      return
+    end
+
+    p delete_member_name = params[:public_folder][:delete_member_name]
+    if !@members.include?(delete_member_name) && delete_member_name != ""
+      flash[:error] = 'User to delete is not in the list of members.'
+      redirect_to new_public_folder_path
+      return
+    end
+
+    @members.append(new_member_name) unless new_member_name == "" # adding new member
+    @members.delete(delete_member_name)
+    members_json = ActiveSupport::JSON::encode(@members)
+
+    @public_folder = PublicFolder.new(name: params[:public_folder][:name], user_id: params[:public_folder][:user_id], description: params[:public_folder][:description], colors: colors_json, members: members_json)
     if (!(red < orange) || !(orange < yellow))
       flash[:error] = 'Wrong color settings.'
       redirect_to new_public_folder_path
@@ -58,7 +89,10 @@ class PublicFoldersController < ApplicationController
     end
     
     if @public_folder.save
-      redirect_to public_folder_url(@public_folder), notice: "Folder was successfully created."
+      redirect_to public_folder_url(@public_folder), notice: "Folder was successfully updated."
+    elsif PublicFolder.find_by_name(params[:public_folder][:name])
+      flash[:error] = 'Folder name already exists.'
+      redirect_to new_public_folder_path
     else
       flash[:error] = 'Folder name cannot be empty.'
       redirect_to new_public_folder_path
@@ -135,10 +169,6 @@ class PublicFoldersController < ApplicationController
     end
   end
 
-  def add_member # view add_member.html.erb, submit method - post, hidden fields: :name, :description, COLORS... 
-    @members = ActiveSupport::JSON::decode(@public_folder.members) #encoding JSON from members field # don't forget to add set_public_folder before action
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_public_folder
@@ -153,6 +183,20 @@ class PublicFoldersController < ApplicationController
     def set_membering_folders # membering folders for side bar, array
       all_public_folders = PublicFolder.all
       p @membering_folders = all_public_folders.select{ |folder| ActiveSupport::JSON::decode(folder.members).include?(current_user.username) }
+    end
+
+    def check_ownership
+      if current_user.id != @public_folder.user_id
+        flash[:notice] = 'You must be the owner to edit this folder.'
+        redirect_to public_folder_path
+      end
+    end
+
+    def check_membership
+      members = ActiveSupport::JSON::decode(@public_folder.members)
+      if !members.include?(current_user.username) && current_user.id != @public_folder.user_id
+        redirect_to public_folders_path
+      end
     end
 
     # Only allow a list of trusted parameters through.

@@ -34,16 +34,16 @@
         <%= form.number_field :yellow, value: colors["yellow"] , class: "form-control", style: "margin-left: 5px" %>
       </div>
   </div>
-  <h1>Add or delete member</h1>
+  <h1>Add or delete a member</h1>
     <div class="row">
       <div class="col-5" style="margin-top: 8px">
-        <%= form.label 'Add member by nickname' %>
+        <%= form.label 'Add a member by nickname' %>
         <%= form.text_field :new_member_name, value: "", class: "form-control", style: "width: 220px" %>
         <% if @members.empty? %>
-          <%= form.label 'Delete member by nickname', hidden: "hidden" %>
+          <%= form.label 'Delete a member by nickname', hidden: "hidden" %>
           <%= form.text_field :delete_member_name, value: "", class: "form-control", style: "width: 220px", hidden: "hidden" %>
         <% else %>
-          <%= form.label 'Delete member by nickname' %>
+          <%= form.label 'Delete a member by nickname' %>
           <%= form.text_field :delete_member_name, value: "", class: "form-control", style: "width: 220px" %>
         <% end %>
       </div>

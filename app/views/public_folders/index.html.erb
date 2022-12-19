@@ -1,6 +1,6 @@
 <div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
   <a href="/public_folders" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+    <svg class="bi me-2" width="40" height="32"><use xlink:href=""/></svg>
     <span class="fs-6"><%= current_user.username + "'s" %> public folders</span>
   </a>
   <hr>
@@ -43,7 +43,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto ">
             <li class="nav-item">
-              <a class="nav-link mx-2 active" aria-current="page" href="">Public Tasks</a>
+              <a class="nav-link mx-2 active" aria-current="page" href="/public_folders">Public Tasks</a>
             </li>
             <li class="nav-item">
               <a class="nav-link mx-2" aria-current="page" href="/folders">My Tasks</a>
@@ -69,11 +69,10 @@
     <div class="col-10">
       <h1>Hello, <%= current_user.username %>! You're in <u class="linear-wipe">public</u> tasks!</h1>
       <h1>Choose an existing folder or <a href="/public_folders/new" style="color: green">create</a> a new one!</h1>
-      <h1 style="color: red">Пофиксить ссылки в навбаре, добавить Public Folders</h1>
-      <div class="text-center">
-        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 100px; width: 100px" %>
-        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 100px; width: 100px" %>
-        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 100px; width: 100px" %>
+      <div class="text-center" style="margin-top: 30px">
+        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 330px; width: 330px" %>
+        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 330px; width: 330px" %>
+        <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 330px; width: 330px" %>
       </div>
     </div>
   </div>

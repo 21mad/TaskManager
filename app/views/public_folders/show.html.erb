@@ -1,6 +1,6 @@
 <div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
-  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-    <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
+  <a href="/public_folders" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <svg class="bi me-2" width="40" height="32"><use xlink:href=""/></svg>
     <span class="fs-6"><%= current_user.username + "'s" %> public folders</span>
   </a>
   <hr>
@@ -60,7 +60,7 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto ">
             <li class="nav-item">
-              <a class="nav-link mx-2 active" aria-current="page" href="">Public Tasks</a>
+              <a class="nav-link mx-2 active" aria-current="page" href="/public_folders">Public Tasks</a>
             </li>
             <li class="nav-item">
               <a class="nav-link mx-2" aria-current="page" href="/folders">My Tasks</a>
@@ -164,12 +164,12 @@
               <tr><th>Nickname</th><th colspan="2">Impact</th></tr>
               <tr>
                 <% tasks_done_by_owner = Task.where(public_folder_id: @public_folder.id, done_by: owner).count %>
-                <td><span style="color: green"><%= owner %></span></td><td><%= Task.where(public_folder_id: @public_folder.id, done_by: owner).count %>/<%= tasks_total %></td>
+                <% percent = 0 %>
+                <% percent = ((tasks_done_by_owner / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
+                <td><span style="color: green"><%= owner %></span></td><td><%= Task.where(public_folder_id: @public_folder.id, done_by: owner).count %>/<%= tasks_total %> | <%= percent %>%</td>
                 <td>
-                  <% percent = 0 %>
-                  <% percent = ((tasks_done_by_owner / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
-                  <div class="progress" style="margin-top: 4px">
-                  <div class="progress-bar" role="progressbar" style="width: <%= percent %>%; background-color: lightgreen; color: black" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"><b><%= percent %>%</b></div>
+                  <div class="progress" style="margin-top: 4px; width: 40px">
+                  <div class="progress-bar" role="progressbar" style="width: <%= percent %>%; background-color: lightgreen; color: black; font-size: x-small" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"></div>
                   </div>
                 </td>
               </tr>
@@ -179,10 +179,10 @@
                 <% percent = ((tasks_done_by_member / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
                 <tr>
                   <td><%= member %></td>
-                  <td><%= tasks_done_by_member %>/<%= tasks_total %></td>
+                  <td><%= tasks_done_by_member %>/<%= tasks_total %> | <%= percent %>%</td>
                   <td>
-                    <div class="progress" style="margin-top: 4px">
-                    <div class="progress-bar" role="progressbar" style="width: <%= percent %>%; background-color: lightgreen; color: black" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"><b><%= percent %>%</b></div>
+                    <div class="progress" style="margin-top: 4px; width: 40px">
+                    <div class="progress-bar" role="progressbar" style="width: <%= percent %>%; background-color: lightgreen; color: black; font-size: x-small" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                   </td>
                 </tr>
@@ -203,7 +203,7 @@
               <% end %>
             </table>
           <% else %>
-            Member list is empty.
+            Action list is empty.
           <% end %>
         </div>
       </div>
