@@ -71,7 +71,7 @@
           <td><s><%= task.title %></s></td>
           <td><%= image_tag 'logos/done.png', style: "width: 20px; height: 20px" %></td>
           <td><%= l task.deadline, format: :long %></td>
-          <td>done by: <b><%= task.done_by %></b></td>
+          <td><%= t 'done_by' %><b><%= task.done_by %></b></td>
           <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete, class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %></td>
         </tr>
       <% end %>
