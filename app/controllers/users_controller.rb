@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         sign_in @user
-        format.html { redirect_to root_path, notice: "User was successfully created." }
+        format.html { redirect_to root_path, notice: t('welcome') }
       else
         format.html { render :new, status: :unprocessable_entity }
       end
@@ -45,7 +45,7 @@ class UsersController < ApplicationController
   def update
     @folders = Folder.where(user_id: current_user.id)
       if @user.update(user_params)
-        redirect_to user_url(@user), notice: "User was successfully updated."
+        redirect_to user_url(@user), notice: t('user_was_updated')
       elsif !current_user.nil?
         flash[:error] = 'The task title and deadline cannot be empty :('
         # redirect_to user_url(@user) , status: :unprocessable_entity
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     @user.destroy
 
     respond_to do |format|
-      format.html { redirect_to users_url, notice: "Account was successfully deleted." }
+      format.html { redirect_to users_url, notice: t('user_was_destroyed') }
     end
   end
 
@@ -80,6 +80,6 @@ class UsersController < ApplicationController
     end
 
     def stay_admin
-      redirect_to user_path, alert: "You're admin!" if current_user.id == 6
+      redirect_to user_path, alert: t('uradmin') if current_user.id == 6
     end
 end

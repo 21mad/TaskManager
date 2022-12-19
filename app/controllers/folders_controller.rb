@@ -37,16 +37,16 @@ class FoldersController < ApplicationController
     colors_json = ActiveSupport::JSON::encode(colors)
     @folder = Folder.new(name: params[:folder][:name], user_id: params[:folder][:user_id], description: params[:folder][:description], colors: colors_json)
     if (!(red < orange) || !(orange < yellow))
-      flash[:error] = 'Wrong color settings.'
+      flash[:error] = t('wrong_colors')
       redirect_to new_folder_path
       return
     end
     
     if @folder.save
-      redirect_to folder_url(@folder), notice: "Folder was successfully created."
+      redirect_to folder_url(@folder), notice: t('folder_was_created')
       # format.json { render :show, status: :created, location: @folder }
     else
-      flash[:error] = 'Folder name cannot be empty.'
+      flash[:error] = t('folder_name_not_empty')
       redirect_to new_folder_path
       # format.json { render json: @folder.errors, status: :unprocessable_entity }
     end
@@ -61,16 +61,16 @@ class FoldersController < ApplicationController
     colors = { "red" => red, "orange" => orange, "yellow" => yellow }
     colors_json = ActiveSupport::JSON::encode(colors)
     if (!(red < orange) || !(orange < yellow))
-      flash[:error] = 'Wrong color settings.'
+      flash[:error] = t('wrong_colors')
       redirect_to edit_folder_path
       return
     end
 
     if @folder.update(name: params[:folder][:name], user_id: params[:folder][:user_id], description: params[:folder][:description], colors: colors_json) # change to my_params or add to folder_params colors
-      redirect_to folder_url(@folder), notice: "Folder was successfully updated."
+      redirect_to folder_url(@folder), notice: t('folder_was_updated')
       # format.json { render :show, status: :ok, location: @folder }
     else
-      flash[:error] = 'Folder name cannot be empty.'
+      flash[:error] = t('folder_name_not_empty')
       redirect_to edit_folder_path
       # format.json { render json: @folder.errors, status: :unprocessable_entity }
     end
@@ -81,7 +81,7 @@ class FoldersController < ApplicationController
     @folder.destroy
 
     respond_to do |format|
-      format.html { redirect_to folders_url, notice: "Folder was successfully destroyed." }
+      format.html { redirect_to folders_url, notice: t('folder_was_destroyed') }
       format.json { head :no_content }
     end
   end

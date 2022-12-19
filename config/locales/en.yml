@@ -30,4 +30,158 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  my_tasks: "My Tasks"
+  logout: "Logout"
+  account: "Account"
+  update: "Update"
+  # error: "erorr"
+  # errors:
+  #  messages:
+  #    blank: "can't be blank"
+  #    confirmation: doesn't match %{attribute}
+  
+  login: "Login"
+  welcome: "Welcome!"
+  continue: "To continue, log in to your account:"
+  username: "User name"
+  login_btn: "Log in"
+  have_acc?: "Don't have an account yet? Create!"
+  registr: "Registration"
+  helpers:
+    label:
+      username: "User name"
+      password: "Password"
+    submit:
+      create: "Create a %{model}"
+      update: "Update a %{model}"
+  no_user: "There is no such user."
+  wrong_pass: "Wrong password."
+
+  signup: "Sign Up"
+  user_reg: "User Registration"
+  activerecord:
+    models:
+      user: "User"
+    attributes:
+      user:
+        username: "User Name"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Password confirmation"
+      folder:
+        name: "Name"
+        description: "Description"
+      public_folder:
+        name: "Name"
+        description: "Description"
+      task:
+        title: "Title"
+        deadline: "Deadline"
+  is_invalid: "is invalid."
+  is_short: "is too short. It must contain 5 or more characters"
+  error: "error"
+
+  folders: "'s folders"
+  new_folder: "Create new folder"
+  public_tasks: "Public Tasks"
+  my_tasks: "My Tasks"
+  all_users: "All Users"
+
+  hello: "Hello, "
+  choose: "Choose an existing folder or "
+  create: "create"
+  new_one: " a new one!"
+  new_folder_title: "New folder"
+
+  describe: "Describe your folder..."
+  markers: "Color marker settings"
+  if_days_left: "if days left <"
+  create_folder: "Create Folder"
+  want_to: "Do you want to "
+  red_delete: "delete"
+  this_folder?: " this folder?"
+  delete_this_folder!: "Delete this folder!"
+  editing: "Editing "
+
+  s_tasks: "'s tasks"
+  folder_was_created: "Folder was successfully created."
+  folder_name_not_empty: "Folder name cannot be empty."
+  wrong_colors: "Wrong color settings."
+  folder_was_updated: "Folder was successfully updated."
+  folder_was_detroyed: "Folder was successfully destroyed."
+  
+  current_progress: "Current progress"
+  write_task: "Write your task here..."
+  add_task: "Add task"
+
+  complete: "Complete"
+  title: "Title"
+  status: "Status"
+  deadline: "Deadline"
+  time_left: "Time Left"
+  delete: "Delete"
+  folder_empty_html: "This folder is empty :(<br/> Add some tasks."
+  task_empty: "The task title and deadline cannot be empty :("
+  owner_rule: "Only the owner can delete completed tasks."
+  do: "Do"
+  undo: "Undo"
+  day: " day"
+  days: " days"
+  days_overdue: " days overdue"
+
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
+  s_account: "'s account"
+  user_info: "User Information"
+  delete_acc?: "Want to delete account?"
+  delete_acc: "Delete this account"
+  email: "Email"
+  reg_date: "Registration date"
+  folders_total: "Folders total"
+  tasks_total: "Tasks total"
+  tasks_completed: "Tasks completed"
+  progress_total: "Progress total"
+
+  user_list: "User list"
+  users: "Users"
+  show_user: "Show this user"
+  change_lang: "Change language"
+
+  ownership: "Ownership"
+  membership: "Membership"
+  new_public_folder: "Create new public folder"
+  urin: "You're in "
+  public: "public"
+  tasks: " tasks!"
+
+  public_folders: "'s public folders"
+  new_public_folder_title: "New public folder"
+  add_del_member: "Add or delete a member"
+  add_mem: "Add a member by nickname"
+  del_mem: "Delete a member by nickname"
+  current_members: "Current members"
+  owner: "Owner"
+  total_progress: "Total progress"
+  member_list: "Member list"
+  member_list_empty: "Member list is empty."
+  nickname: "Nickname"
+  members_impact: "Members impact"
+  impact: "Impact"
+  last_completed: "Last completed"
+  my_date: "Date"
+
+  user_not_found: "User to add not found."
+  user_in_members: "User to add is already in member list."
+  user_not_member: "User to delete is not in the list of members."
+  folder_name_exists: "Folder name already exists."
+
+  user_was_created: "User was successfully created."
+  user_was_updated: "User was successfully updated."
+  user_was_destroyed: "Account was successfully deleted."
+
+  uradmin: "You're admin!"
+  must_be_owner: "You must be the owner to edit this folder."

@@ -1,32 +1,32 @@
 <div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
-  <a href="/public_folders" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+  <a href="/<%= locale %>/public_folders" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <svg class="bi me-2" width="40" height="32"><use xlink:href=""/></svg>
-    <span class="fs-6"><%= current_user.username + "'s" %> public folders</span>
+    <span class="fs-6"><%= current_user.username %><%= t 'public_folders' %></span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    <span class="fs-6" style="text-align: center; color: yellow">Ownership:</span>
+    <span class="fs-6" style="text-align: center; color: yellow"><%= t 'ownership' %>:</span>
     <% @owning_folders.each do |folder|%>
     <li>
       <div class="nav-link">
-        <%= link_to image_tag('logos/settings-16.png'), url_for("/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+        <%= link_to image_tag('logos/settings-16.png'), url_for("/#{locale}/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
         <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
       </div>
     </li>
     <% end %>
     <hr>
-    <span class="fs-6" style="text-align: center; color: cyan">Membership:</span>
+    <span class="fs-6" style="text-align: center; color: cyan"><%= t 'membership' %>:</span>
     <% @membering_folders.each do |folder|%>
     <li>
       <div class="nav-link">
-        <%= link_to image_tag('logos/settings-16.png'), url_for("/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+        <%= link_to image_tag('logos/settings-16.png'), url_for("/#{locale}/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
         <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
       </div>
     </li>
     <% end %>
   </ul>
   <hr>
-  <p><%= button_to "Create new public folder", new_public_folder_path, class: "btn btn-success", method: :get %></p>
+  <p><%= button_to t("new_public_folder"), new_public_folder_path, class: "btn btn-success", method: :get %></p>
 </div>
 
 <div class="d-inline-flex flex-column bg-light" style="width: 85%; height: 100vh; overflow: auto">
@@ -43,21 +43,21 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto ">
             <li class="nav-item">
-              <a class="nav-link mx-2 active" aria-current="page" href="/public_folders">Public Tasks</a>
+              <a class="nav-link mx-2 active" aria-current="page" href="/<%= locale %>/public_folders"><%= t 'public_tasks' %></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-2" aria-current="page" href="/folders">My Tasks</a>
+              <a class="nav-link mx-2" aria-current="page" href="/<%= locale %>/folders"><%= t 'my_tasks' %></a>
             </li>
             <% if current_user.id == 6 %>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="/users">All Users</a>
+              <a class="nav-link mx-2" href="/<%= locale %>/users"><%= t 'all_users' %></a>
             </li>
             <% end %>
             <li class="nav-item">
-              <%= link_to "Account", "users/#{current_user.id}" , class: "nav-link mx-2"%>
+              <%= link_to t("account"), "/#{locale}/users/#{current_user.id}" , class: "nav-link mx-2"%>
             </li>
             <li class="nav-item">
-              <%= link_to "Logout", session_logout_path, class: "nav-link mx-2" %>
+              <%= link_to t("logout"), session_logout_path, class: "nav-link mx-2" %>
             </li>
           </ul>
         </div> 
@@ -67,8 +67,8 @@
 
   <div class="row d-flex justify-content-center" style="width: 100%; padding-top: 80px">
     <div class="col-10">
-      <h1>Hello, <%= current_user.username %>! You're in <u class="linear-wipe">public</u> tasks!</h1>
-      <h1>Choose an existing folder or <a href="/public_folders/new" style="color: green">create</a> a new one!</h1>
+      <h1><%= t 'hello' %><%= current_user.username %>! <%= t 'urin' %><u class="linear-wipe"><%= t 'public' %></u><%= t 'tasks' %></h1>
+      <h1><%= t 'choose' %><a href="/<%= locale %>/public_folders/new" style="color: green"><%= t 'create' %></a><%= t 'new_one' %></h1>
       <div class="text-center" style="margin-top: 30px">
         <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 330px; width: 330px" %>
         <%= image_tag 'logos/home_smile.png', alt: "smile_png", class: "rotate", style: "height: 330px; width: 330px" %>

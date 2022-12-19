@@ -14,7 +14,7 @@ class TasksController < ApplicationController
       redirect_to folder_path(@task.folder_id) unless @task.folder_id.nil?
       redirect_to public_folder_path(@task.public_folder_id) unless @task.public_folder_id.nil?
     else
-      flash[:error] = 'The task title and deadline cannot be empty :('
+      flash[:error] = t('task_empty')
       redirect_to folder_path(@task.folder_id) unless @task.folder_id.nil?
       redirect_to public_folder_path(@task.public_folder_id) unless @task.public_folder_id.nil?
     end
@@ -23,8 +23,8 @@ class TasksController < ApplicationController
   def update
     @task = Task.find(params[:id])
     if @task.update(task_params)
-      redirect_to "/folders/#{@task.folder_id}/#row#{@task.id}" unless @task.folder_id.nil? # !same as destroy
-      redirect_to "/public_folders/#{@task.public_folder_id}" unless @task.public_folder_id.nil? # /#row#{@task.id} removed
+      redirect_to "/#{locale}/folders/#{@task.folder_id}/#row#{@task.id}" unless @task.folder_id.nil? # !same as destroy
+      redirect_to "/#{locale}/public_folders/#{@task.public_folder_id}" unless @task.public_folder_id.nil? # /#row#{@task.id} removed
     else
       redirect_to root_path
     end
@@ -40,8 +40,8 @@ class TasksController < ApplicationController
       my_path = public_folder_path(@task.public_folder_id)
       public_folder = PublicFolder.find(@task.public_folder_id)
       if (public_folder.user_id != current_user.id) && (@task.done_by != "")
-        flash[:notice] = 'Only the owner can delete completed tasks.'
-        redirect_to "/public_folders/#{@task.public_folder_id}"
+        flash[:notice] = t('owner_rule')
+        redirect_to "/#{locale}/public_folders/#{@task.public_folder_id}"
         return
       end
     end

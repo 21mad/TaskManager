@@ -1,0 +1,161 @@
+ru:
+  my_tasks: "Мои Задачи"
+  logout: "Выйти"
+  account: "Аккаунт"
+  update: "Обновить"
+  
+  login: "Вход"
+  welcome: "Добро пожаловать!"
+  continue: "Чтобы продолжить, войдите в свой аккаунт:"
+  username: "Имя пользователя"
+  login_btn: "Войти"
+  have_acc?: "Ещё нет аккаунта? Создайте!"
+  registr: "Регистрация"
+  helpers:
+    label:
+      username: "Имя пользователя"
+      password: "Пароль"
+    submit:
+      create: "Создать"
+      update: "Обновить"
+  no_user: "Такого пользователя нет."
+  wrong_pass: "Неверный пароль."
+
+  signup: "Регистрация"
+  user_reg: "Регистрация пользователя"
+  activerecord:
+    models:
+      user: "Пользователь"
+    attributes:
+      user:
+        username: "Имя Пользователя"
+        email: "Электронная почта"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+      folder:
+        name: "Название"
+        description: "Описание"
+      public_folder:
+        name: "Название"
+        description: "Описание"
+      task:
+        title: "Заголовок"
+        deadline: "Дедлайн"
+  is_invalid: "некорректна."
+  is_short: "слишком короткое. Должно содержать 5 или более символов."
+  error: "ошибок"
+  errors:
+    messages:
+      blank: "не может быть пустым"
+      confirmation: "не соответсвует %{attribute}"
+  
+  folders: ": папки"
+  new_folder: "Создать новую папку"
+  public_tasks: "Общие Задачи"
+  my_tasks: "Мои Задачи"
+  all_users: "Пользователи"
+  hello: "Привет, "
+  choose: "Выберите существующую папку или "
+  create: "создайте"
+  new_one: " новую!"
+  new_folder_title: "Новая папка"
+  describe: "Опишите вашу папку..."
+  markers: "Настройка цветовых маркеров"
+  if_days_left: "дней осталось <"
+  create_folder: "Создать Папку"
+  want_to: "Хотите "
+  red_delete: "удалить"
+  this_folder?: " эту папку?"
+  delete_this_folder!: "Удалить эту папку!"
+  editing: "Редактирование: "
+  s_tasks: ": задачи"
+  folder_was_created: "Папка была успешно создана."
+  folder_name_not_empty: "Имя папки не может быть пустым."
+  wrong_colors: "Некорректные настройки маркеров."
+  folder_was_updated: "Папка была успешно обновлена"
+  folder_was_destroyed: "Папка была успешно удалена."
+  
+  current_progress: 'Текущий прогресс'
+  write_task: "Запишите вашу задачу здесь..."
+  add_task: "Добавить задачу"
+
+  complete: "Выполнение"
+  title: "Заголовок"
+  status: "Статус"
+  deadline: "Дедлайн"
+  time_left: "Дней Осталось"
+  delete: "Удалить"
+  folder_empty_html: "Эта папка пустая :(<br/> Добавьте свои задачи."
+  task_empty: "Заголовок задачи и дедлайн не могут быть пустыми :("
+  owner_rule: "Только владелец может удалять выполненные задачи."
+  do: "Сделать"
+  undo: "Вернуть"
+  day: " "
+  days: " "
+  days_overdue: "  - просрочено"
+
+  date:
+    formats:
+      default: "%d-%m-%Y"
+      short: "%b %d"
+      long: "%B %d, %Y"
+
+    day_names: [Воскресенье, Понедельник, Вторник, Среда, Четверг, Пятница, Суббота]
+    abbr_day_names: [Вос, Пон, Вт, Ср, Чет, Пят, Суб]
+
+    month_names: [~, Январь, Февраль, Март, Апрель, Маи, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+    abbr_month_names: [~, Янв, Фев, Мар, Апр, Маи, Июн, Июл, Авг, Сен, Окт, Ноя, Дек]
+  time:
+    formats:
+      default: "%d-%m-%Y %H:%M:%S"
+      short: "%d %B %H:%M" 
+      long: "%B %d, %Y %H:%M"
+  s_account: ": аккаунт"
+  user_info: "Информация о пользователе"
+  delete_acc?: "Хотите удалить аккаунт?"
+  delete_acc: "Удалить этот аккаунт"
+  email: "Электронная почта"
+  reg_date: "Дата регистрации"
+  folders_total: "Папок всего"
+  tasks_total: "Задач всего"
+  tasks_completed: "Задач выполнено"
+  progress_total: "Полный прогресс"
+
+  user_list: "Список пользователей"
+  users: "Пользователи"
+  show_user: "Перейти"
+  change_lang: "Поменять язык"
+
+  ownership: "Владение"
+  membership: "Участие"
+  new_public_folder: "Создать новую общую папку"
+  urin: "Вы в "
+  public: "общих"
+  tasks: " задачах!"
+
+  public_folders: ": общие папки"
+  new_public_folder_title: "Новая общая папка"
+  add_del_member: "Добавить или удалить участника"
+  add_mem: "Добавить участника по никнейму"
+  del_mem: "Удалить участника по никнейму"
+  current_members: "Текущие участники"
+  owner: "Владелец"
+  total_progress: "Общий прогресс"
+  member_list: "Список участников"
+  member_list_empty: "Список участников пуст."
+  nickname: "Никнейм"
+  members_impact: "Прогресс участников"
+  impact: "Прогресс"
+  last_completed: "Последнее выполненное"
+  my_date: "Дата"
+  user_not_found: "Пользователь не найден."
+  user_in_members: "Пользователь уже участник." 
+  user_not_member: "Пользователь не является участником." 
+  folder_name_exists: "Папка с таким именем уже существует."
+
+  user_was_created: "Добро пожаловать!"
+  user_was_updated: "Данные были успешно обновлены."
+  user_was_destroyed: "Аккаунт был успешно удалён."
+
+  uradmin: "Вы админ!"
+  must_be_owner: "Вы должны быть владельцем, чтобы редактировать эту папку."

@@ -3,10 +3,10 @@
       <%= form_for @task do |f| %>
       <tr style="vertical-align: middle">
         <td scope="row" style="text-align: right"><b><%= f.label :title, style: "display: block" %></b></td>
-        <td><%= f.text_field :title, class: 'form-control', placeholder: 'Write your task here...' %></td>
+        <td><%= f.text_field :title, class: 'form-control', placeholder: t('write_task') %></td>
         <td style="text-align: right"><b><%= f.label :deadline, style: "display: block" %><b></td>
         <td><%= f.date_field :deadline, class: 'form-control' %></td>
-        <td><%= f.submit 'Add task', class: 'btn btn-secondary'%></td>
+        <td><%= f.submit t('add_task'), class: 'btn btn-secondary'%></td>
         <td><%= f.hidden_field :done, :value => false %></td>
         <td><%= f.hidden_field :folder_id, :value => @folder.id %></td>
       </tr>
@@ -17,12 +17,12 @@
   <table class="table" style="width: 100%">
     <thead>
       <tr>
-        <th scope="col">Complete</th>
-        <th scope="col">Title</th>
-        <th scope="col">Status</th>
-        <th scope="col">Deadline</th>
-        <th scope="col">Time Left</th>
-        <th scope="col">Delete</th>
+        <th scope="col"><%= t 'complete' %></th>
+        <th scope="col"><%= t 'title' %></th>
+        <th scope="col"><%= t 'status' %></th>
+        <th scope="col"><%= t 'deadline' %></th>
+        <th scope="col"><%= t 'time_left' %></th>
+        <th scope="col"><%= t 'delete' %></th>
       </tr>
     </thead>
     <tbody>
@@ -41,20 +41,20 @@
           <td scope="row">
             <%= form_for task do |f| %>
               <%= f.check_box :done, :value => task.done, class: "form-check-input", checked: "checked", hidden: "hidden" %>
-              <%= f.submit 'Do', class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %>
+              <%= f.submit t('do'), class: "btn btn-outline-dark", style: "line-width: 15px; line-height: 15px" %>
               <%= f.text_field :done_by, value: current_user.username, hidden: "hidden" %>
             <% end %>
           </td>
           <td><b><%= task.title %></b></td>
           <td><%= image_tag 'logos/in-progress.png', style: "width: 20px; height: 20px" %><span class="dot<%= bg_color %>"></span></td>
-          <td><%= task.deadline.to_formatted_s(:rfc822) %></td>
+          <td><%= l task.deadline, format: :long %></td>
           <td>
             <% if days == 1 %>
-              1 day
+              1 <%= t 'day' %>
             <% elsif days >= 0 %>
-              <%= days %> days
+              <%= days %> <%= t 'days' %>
             <% else %>
-              <%= days.abs %> days overdue
+              <%= days.abs %> <%= t 'days_overdue' %>
             <% end %>
           </td>
           <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete, class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %></td>
@@ -65,13 +65,13 @@
           <td scope="row">
             <%= form_for task do |f| %>
               <%= f.check_box :done, :value => task.done, class: "form-check-input", checked: "", hidden: "hidden" %>
-              <%= f.submit 'Undo', class: "btn btn-outline-dark", style: "line-width: 15px; line-height: 15px" %>
+              <%= f.submit t('undo'), class: "btn btn-outline-dark", style: "line-width: 15px; line-height: 15px" %>
               <%= f.text_field :done_by, value: "", hidden: "hidden"%>
             <% end %>
           </td>
           <td><s><%= task.title %></s></td>
           <td><%= image_tag 'logos/done.png', style: "width: 20px; height: 20px" %></td>
-          <td><%= task.deadline.to_formatted_s(:rfc822) %></td>
+          <td><%= l task.deadline, format: :long %></td>
           <td></td>
           <td><%= button_to image_tag('logos/trash--v1.png', style: "width: 20px; height: 20px"), task, method: :delete, class: "btn btn-outline-dark", style: "width: 65.06px; line-height: 15px" %></td>
         </tr>

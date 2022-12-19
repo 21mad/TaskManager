@@ -1,42 +1,42 @@
 <div class="d-inline-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 15%; height: 100vh; float: left">
-  <a href="/public_folders" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+  <a href="/<%= locale %>/public_folders" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
     <svg class="bi me-2" width="40" height="32"><use xlink:href=""/></svg>
-    <span class="fs-6"><%= current_user.username + "'s" %> public folders</span>
+    <span class="fs-6"><%= current_user.username %><%= t 'public_folders' %></span>
   </a>
   <hr>
   <ul class="nav nav-pills flex-column mb-auto">
-    <span class="fs-6" style="text-align: center; color: yellow">Ownership:</span>
+    <span class="fs-6" style="text-align: center; color: yellow"><%= t 'ownership' %>:</span>
     <% @owning_folders.each do |folder|%>
       <% if folder == @public_folder %>
         <li>
           <div class="nav-link active">
-            <%= link_to image_tag('logos/settings-16.png'), url_for("/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+            <%= link_to image_tag('logos/settings-16.png'), url_for("/#{locale}/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
             <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
           </div>
         </li>
       <% else %>
         <li>
           <div class="nav-link">
-            <%= link_to image_tag('logos/settings-16.png'), url_for("/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+            <%= link_to image_tag('logos/settings-16.png'), url_for("/#{locale}/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
             <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
           </div>
         </li>
       <% end %>
     <% end %>
     <hr>
-    <span class="fs-6" style="text-align: center; color: cyan">Membership:</span>
+    <span class="fs-6" style="text-align: center; color: cyan"><%= t 'membership' %>:</span>
     <% @membering_folders.each do |folder|%>
       <% if folder == @public_folder %>
         <li>
           <div class="nav-link active">
-            <%= link_to image_tag('logos/settings-16.png'), url_for("/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+            <%= link_to image_tag('logos/settings-16.png'), url_for("/#{locale}/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
             <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
           </div>
         </li>
       <% else %>
         <li>
           <div class="nav-link">
-            <%= link_to image_tag('logos/settings-16.png'), url_for("/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
+            <%= link_to image_tag('logos/settings-16.png'), url_for("/#{locale}/public_folders/#{folder.id}/edit"), :class => 'bi me-2', :remote => true %>
             <%= link_to folder.name, folder, style: "color: white; text-decoration: none"%>
           </div>
         </li>
@@ -44,7 +44,7 @@
     <% end %>
   </ul>
   <hr>
-  <p><%= button_to "Create new public folder", new_public_folder_path, class: "btn btn-success", method: :get %></p>
+  <p><%= button_to t("new_public_folder"), new_public_folder_path, class: "btn btn-success", method: :get %></p>
 </div>
 
 <div class="d-inline-flex flex-column bg-light" style="width: 85%; height: 100vh; overflow: auto">
@@ -52,7 +52,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-2" style="height: 125%">
       <div class="container-fluid">
         <img src="https://findicons.com/files/icons/732/snow_leopard/256/folder_folder.png" alt="Logo" style="width: 30px; height: 30px; margin-right: 10px">
-        <%= link_to @public_folder.name, "#{@public_folder.id}/edit", class: "navbar-brand" %>
+        <%= link_to @public_folder.name, "/#{locale}/public_folders/#{@public_folder.id}/edit", class: "navbar-brand" %>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -60,21 +60,21 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ms-auto ">
             <li class="nav-item">
-              <a class="nav-link mx-2 active" aria-current="page" href="/public_folders">Public Tasks</a>
+              <a class="nav-link mx-2 active" aria-current="page" href="/<%= locale %>/public_folders"><%= t 'public_tasks' %></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link mx-2" aria-current="page" href="/folders">My Tasks</a>
+              <a class="nav-link mx-2" aria-current="page" href="/<%= locale %>/folders"><%= t 'my_tasks' %></a>
             </li>
             <% if current_user.id == 6 %>
             <li class="nav-item">
-              <a class="nav-link mx-2" href="/users">All Users</a>
+              <a class="nav-link mx-2" href="/<%= locale %>/users"><%= t 'all_users' %></a>
             </li>
             <% end %>
             <li class="nav-item">
-              <%= link_to "Account", "/users/#{current_user.id}" , class: "nav-link mx-2"%>
+              <%= link_to t("account"), "/#{locale}/users/#{current_user.id}" , class: "nav-link mx-2"%>
             </li>
             <li class="nav-item">
-              <%= link_to "Logout", session_logout_path, class: "nav-link mx-2" %>
+              <%= link_to t("logout"), session_logout_path, class: "nav-link mx-2" %>
             </li>
           </ul>
         </div> 
@@ -90,13 +90,13 @@
     <div class="col-10 <%= celebration %>">
       <div class="row" style="margin-top: 20px; margin-bottom: 10px">
         <div class="col-6">
-          <h1><%= @public_folder.name %>'s tasks</h1>
+          <h1><%= @public_folder.name %><%= t 's_tasks' %></h1>
           <h4 style="font-style: italic"><%= @public_folder.description %></h4>
-          <h4>Owner: <%= owner %></h4>
+          <h4><%= t 'owner' %>: <%= owner %></h4>
           <p style="color: green"><%= notice %></p>
         </div>
         <div class="col-6" style="text-align: right">
-          <h1>Total progress</h1>
+          <h1><%= t 'total_progress' %></h1>
           <% percent = 0 %>
           <% percent = ((tasks_done / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
           <div class="progress" style="margin-top: 16px">
@@ -113,10 +113,10 @@
             <%= form_for @task do |f| %>
             <tr style="vertical-align: middle">
               <td scope="row" style="text-align: right"><b><%= f.label :title, style: "display: block" %></b></td>
-              <td><%= f.text_field :title, class: 'form-control', placeholder: 'Write your task here...' %></td>
+              <td><%= f.text_field :title, class: 'form-control', placeholder: t('write_task') %></td>
               <td style="text-align: right"><b><%= f.label :deadline, style: "display: block" %><b></td>
               <td><%= f.date_field :deadline, class: 'form-control' %></td>
-              <td><%= f.submit 'Add task', class: 'btn btn-secondary'%></td>
+              <td><%= f.submit t('add_task'), class: 'btn btn-secondary'%></td>
               <td><%= f.hidden_field :done, :value => false %></td>
               <td><%= f.hidden_field :public_folder_id, :value => @public_folder.id %></td>
             </tr>
@@ -126,17 +126,17 @@
           <table class="table" style="width: 100%">
             <thead>
               <tr>
-                <th scope="col">Complete</th>
-                <th scope="col">Title</th>
-                <th scope="col">Status</th>
-                <th scope="col">Deadline</th>
-                <th scope="col">Time Left</th>
-                <th scope="col">Delete</th>
+                <th scope="col"><%= t 'complete' %></th>
+                <th scope="col"><%= t 'title' %></th>
+                <th scope="col"><%= t 'status' %></th>
+                <th scope="col"><%= t 'deadline' %></th>
+                <th scope="col"><%= t 'time_left' %></th>
+                <th scope="col"><%= t 'delete' %></th>
               </tr>
             </thead>
             <tbody>
               <tr style="border-color: #f8f9fa">
-                <td colspan="6" style="text-align: center"><h4 style="height: 200px; margin-top: 30px">This folder is empty :(<br/> Add some tasks.</h4></td>
+                <td colspan="6" style="text-align: center"><h4 style="height: 200px; margin-top: 30px"><%= t "folder_empty_html" %></h4></td>
               </tr>
             </tbody>
           </table>
@@ -145,23 +145,23 @@
       
       <div class="row">
         <div class="col-4" style="text-align: center; margin-top: 10px;">
-          <h1>Member list</h1>
+          <h1><%= t 'member_list' %></h1>
           <% unless @members.empty? %>
             <table class="table table-sm border rounded">
-              <tr><th>Nickname</th></tr>
+              <tr><th><%= t 'nickname' %></th></tr>
               <% @members.each do |member|%>
                 <tr><td><%= member %></td></tr>
               <% end %>
             </table>
           <% else %>
-            Member list is empty.
+            <%= t 'member_list_empty' %>
           <% end %>
         </div>
         <div class="col-4" style="text-align: center; margin-top: 10px">
-          <h1>Members impact</h1>
+          <h1><%= t 'members_impact' %></h1>
           <% unless @members.empty? %>
             <table class="table table-sm border rounded">
-              <tr><th>Nickname</th><th colspan="2">Impact</th></tr>
+              <tr><th><%= t 'nickname' %></th><th colspan="2"><%= t 'impact' %></th></tr>
               <tr>
                 <% tasks_done_by_owner = Task.where(public_folder_id: @public_folder.id, done_by: owner).count %>
                 <% percent = 0 %>
@@ -189,21 +189,19 @@
               <% end %>
             </table>
           <% else %>
-            Member list is empty.
+            <%= t 'member_list_empty' %>
           <% end %>
         </div>
         <div class="col-4" style="text-align: center; margin-top: 10px">
-          <h1>Last completed</h1>
+          <h1><%= t 'last_completed' %></h1>
           <% unless @members.empty? %>
             <table class="table table-sm border rounded" style="vertical-align: center">
-              <tr><th>Nickname</th><th>Title</th><th>Date</th></tr>
+              <tr><th><%= t 'nickname' %></th><th><%= t 'title' %></th><th><%= t 'my_date' %></th></tr>
               <% last_completed = @tasks.where.not(done_by: "").order(updated_at: :desc) %>
               <% last_completed.each do |task| %>
                 <tr><td><%= task.done_by %></td><td><%= task.title %></td><td><%= task.updated_at.to_formatted_s(:db) %></td></tr>
               <% end %>
             </table>
-          <% else %>
-            Action list is empty.
           <% end %>
         </div>
       </div>

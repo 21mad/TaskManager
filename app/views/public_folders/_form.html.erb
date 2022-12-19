@@ -1,7 +1,7 @@
 <%= form_with(model: folder) do |form| %>
   <% if folder.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+      <h2><%= pluralize(folder.errors.count, "error") %>:</h2>
 
       <ul>
         <% folder.errors.each do |error| %>
@@ -15,42 +15,42 @@
     <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name,  class: "form-control" %>
     <%= form.label :description, style: "display: block" %>
-    <%= form.text_area :description, placeholder: "Describe your folder...", class: "form-control" %>
-    <h1>Color marker settings</h1>
+    <%= form.text_area :description, placeholder: t("describe"), class: "form-control" %>
+    <h1><%= t 'markers' %></h1>
     <div class="row">
       <div class="col-3" style="margin-right: 20px">
         <span class="dot-red" style="margin-right: 10px"></span>
-        <%= form.label 'if days left <', style: "display-block" %>
+        <%= form.label t('if_days_left'), style: "display-block" %>
         <%= form.number_field :red, value: colors["red"] , class: "form-control", style: "margin-left: 5px" %>
       </div>
       <div class="col-3" style="margin-right: 20px">
         <span class="dot-orange" style="margin-right: 10px"></span>
-        <%= form.label 'if days left <', style: "display-block" %>
+        <%= form.label t('if_days_left'), style: "display-block" %>
         <%= form.number_field :orange, value: colors["orange"] , class: "form-control", style: "margin-left: 5px" %>
       </div>
       <div class="col-3" style="margin-right: 20px">
         <span class="dot-yellow" style="margin-right: 10px"></span>
-        <%= form.label 'if days left <', style: "display-block" %>
+        <%= form.label t('if_days_left'), style: "display-block" %>
         <%= form.number_field :yellow, value: colors["yellow"] , class: "form-control", style: "margin-left: 5px" %>
       </div>
   </div>
-  <h1>Add or delete a member</h1>
+  <h1><%= t 'add_del_member' %></h1>
     <div class="row">
       <div class="col-5" style="margin-top: 8px">
-        <%= form.label 'Add a member by nickname' %>
+        <%= form.label t('add_mem') %>
         <%= form.text_field :new_member_name, value: "", class: "form-control", style: "width: 220px" %>
         <% if @members.empty? %>
-          <%= form.label 'Delete a member by nickname', hidden: "hidden" %>
+          <%= form.label t('del_mem'), hidden: "hidden" %>
           <%= form.text_field :delete_member_name, value: "", class: "form-control", style: "width: 220px", hidden: "hidden" %>
         <% else %>
-          <%= form.label 'Delete a member by nickname' %>
+          <%= form.label t('del_mem') %>
           <%= form.text_field :delete_member_name, value: "", class: "form-control", style: "width: 220px" %>
         <% end %>
       </div>
       <% if @members.empty? %>
         <div class="col-4" style="margin: 0 20px 0 20px">
           <table id="members" class="table" hidden="hidden">
-            <tr><th>Current members: </th></tr>
+            <tr><th><%= t 'current_members' %>: </th></tr>
             <% @members.each do |member|%>
               <tr><td><%= member %></td></tr>
             <% end %>
@@ -59,7 +59,7 @@
       <% else %>
         <div class="col-4" style="margin: 0 20px 0 20px">
           <table id="members" class="table">
-            <tr><th>Current members: </th></tr>
+            <tr><th><%= t 'current_members' %>: </th></tr>
             <% @members.each do |member|%>
               <tr><td><%= member %></td></tr>
             <% end %>

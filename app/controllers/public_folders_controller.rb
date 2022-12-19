@@ -50,7 +50,7 @@ class PublicFoldersController < ApplicationController
     colors = { "red" => red, "orange" => orange, "yellow" => yellow }
     colors_json = ActiveSupport::JSON::encode(colors)
     if (!(red < orange) || !(orange < yellow))
-      flash[:error] = 'Wrong color settings.'
+      flash[:error] = t('wrong_colors')
       redirect_to new_public_folder_path
       return
     end
@@ -59,20 +59,20 @@ class PublicFoldersController < ApplicationController
 
     new_member_name = params[:public_folder][:new_member_name]
     if (!(User.find_by_username(new_member_name)) && (new_member_name != "")) || (new_member_name == current_user.username)
-      flash[:error] = 'User to add not found.'
+      flash[:error] = t ('user_not_found')
       redirect_to new_public_folder_path
       return
     end
 
     if @members.include?(new_member_name)
-      flash[:error] = 'User to add is already in member list.'
+      flash[:error] = t ('user_in_members')
       redirect_to new_public_folder_path
       return
     end
 
     p delete_member_name = params[:public_folder][:delete_member_name]
     if !@members.include?(delete_member_name) && delete_member_name != ""
-      flash[:error] = 'User to delete is not in the list of members.'
+      flash[:error] = t('user_not_member')
       redirect_to new_public_folder_path
       return
     end
@@ -83,18 +83,18 @@ class PublicFoldersController < ApplicationController
 
     @public_folder = PublicFolder.new(name: params[:public_folder][:name], user_id: params[:public_folder][:user_id], description: params[:public_folder][:description], colors: colors_json, members: members_json)
     if (!(red < orange) || !(orange < yellow))
-      flash[:error] = 'Wrong color settings.'
+      flash[:error] = t('wrong_colors')
       redirect_to new_public_folder_path
       return
     end
     
     if @public_folder.save
-      redirect_to public_folder_url(@public_folder), notice: "Folder was successfully updated."
+      redirect_to public_folder_url(@public_folder), notice: t('folder_was_created')
     elsif PublicFolder.find_by_name(params[:public_folder][:name])
-      flash[:error] = 'Folder name already exists.'
+      flash[:error] = t('folder_name_exists')
       redirect_to new_public_folder_path
     else
-      flash[:error] = 'Folder name cannot be empty.'
+      flash[:error] = t('folder_name_not_empty')
       redirect_to new_public_folder_path
     end
   end
@@ -117,7 +117,7 @@ class PublicFoldersController < ApplicationController
     colors = { "red" => red, "orange" => orange, "yellow" => yellow }
     colors_json = ActiveSupport::JSON::encode(colors)
     if (!(red < orange) || !(orange < yellow))
-      flash[:error] = 'Wrong color settings.'
+      flash[:error] = t('wrong_colors')
       redirect_to edit_public_folder_path
       return
     end
@@ -126,20 +126,20 @@ class PublicFoldersController < ApplicationController
 
     new_member_name = params[:public_folder][:new_member_name]
     if (!(User.find_by_username(new_member_name)) && (new_member_name != "")) || (new_member_name == current_user.username)
-      flash[:error] = 'User to add not found.'
+      flash[:error] = t ('user_not_found')
       redirect_to edit_public_folder_path
       return
     end
 
     if @members.include?(new_member_name)
-      flash[:error] = 'User to add is already in member list.'
+      flash[:error] = t ('user_in_members')
       redirect_to edit_public_folder_path
       return
     end
 
     p delete_member_name = params[:public_folder][:delete_member_name]
     if !@members.include?(delete_member_name) && delete_member_name != ""
-      flash[:error] = 'User to delete is not in the list of members.'
+      flash[:error] = t('user_not_member')
       redirect_to edit_public_folder_path
       return
     end
@@ -149,12 +149,12 @@ class PublicFoldersController < ApplicationController
     members_json = ActiveSupport::JSON::encode(@members)
 
     if @public_folder.update(name: params[:public_folder][:name], user_id: params[:public_folder][:user_id], description: params[:public_folder][:description], colors: colors_json, members: members_json)
-      redirect_to public_folder_url(@public_folder), notice: "Folder was successfully updated."
+      redirect_to public_folder_url(@public_folder), notice: t('folder_was_updated')
     elsif PublicFolder.find_by_name(params[:public_folder][:name])
-      flash[:error] = 'Folder name already exists.'
+      flash[:error] = t('folder_name_exists')
       redirect_to edit_public_folder_path
     else
-      flash[:error] = 'Folder name cannot be empty.'
+      flash[:error] = t('folder_name_not_empty')
       redirect_to edit_public_folder_path
     end
   end
@@ -164,7 +164,7 @@ class PublicFoldersController < ApplicationController
     @public_folder.destroy
 
     respond_to do |format|
-      format.html { redirect_to public_folders_url, notice: "Public folder was successfully destroyed." }
+      format.html { redirect_to public_folders_url, notice: t('folder_was_destroyed') }
       format.json { head :no_content }
     end
   end
@@ -187,7 +187,7 @@ class PublicFoldersController < ApplicationController
 
     def check_ownership
       if current_user.id != @public_folder.user_id
-        flash[:notice] = 'You must be the owner to edit this folder.'
+        flash[:notice] = t('must_be_owner')
         redirect_to public_folder_path
       end
     end

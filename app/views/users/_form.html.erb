@@ -1,7 +1,7 @@
 <%= form_with(model: user) do |form| %>
   <% if user.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <h2><%= pluralize(user.errors.count, t("error")) %></h2>
 
       <ul>
         <% user.errors.each do |error| %>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div>
-    <%= form.label 'User name', style: "display: block" %>
+    <%= form.label :username, style: "display: block" %>
     <%= form.text_field :username, class: "form-control" %>
   </div>
 
@@ -22,18 +22,18 @@
   </div>
 
   <div>
-    <%= form.label 'Password', style: "display: block" %>
+    <%= form.label :password, style: "display: block" %>
     <%= form.password_field :password, class: "form-control" %>
   </div>
 
   <div>
-    <%= form.label :lbl, value: 'Confirm password', style: "display: block" %>
+    <%= form.label :password_confirmation, style: "display: block" %>
     <%= form.password_field :password_confirmation, class: "form-control" %>
   </div>
   <div style="margin-top: 20px">
-    <% btn_title = 'Register' %>
+    <% btn_title = t('registr') %>
     <% unless current_user.nil? %>
-      <% btn_title = 'Update' %>
+      <% btn_title = t('update') %>
     <% end %>
     <%= form.submit btn_title, id: 'submit-btn', class: "btn btn-success" %>
   </div>

@@ -2,34 +2,34 @@
 <% cur_folders = Folder.where(user_id: user.id) %>
 
   <p>
-    <strong>Username: </strong>
+    <strong><%= t 'username' %>: </strong>
     <%= user.username %>
   </p>
 
   <p>
-    <strong>Email: </strong>
+    <strong><%= t 'email' %>: </strong>
     <%= user.email %>
   </p>
 
   <p>
-    <strong>Registration date: </strong>
+    <strong><%= t 'reg_date' %>: </strong>
     <%= user.created_at.to_formatted_s(:db) %>
   </p>
 
   <p>
-    <strong>Folders total: </strong>
+    <strong><%= t 'folders_total' %>: </strong>
     <%= cur_folders.count %>
   </p>
 
   <p>
-    <strong>Tasks total: </strong>
+    <strong><%= t 'tasks_total' %>: </strong>
     <% tasks_total = 0 %>
     <% cur_folders.each do |f| %>
       <% tasks_total += Task.where(folder_id: f.id).count %>
     <% end %>
     <%= tasks_total %> | 
 
-    <strong>Tasks completed: </strong>
+    <strong><%= t 'tasks_completed' %>: </strong>
     <% tasks_done = 0 %>
     <% cur_folders.each do |f| %>
       <% tasks_done += Task.where(folder_id: f.id, done: true).count %>
@@ -38,13 +38,19 @@
   </p>
 
   <p>
-    <strong>Progress total: </strong>
+    <strong><%= t 'progress_total' %>: </strong>
     <%= tasks_done %>/<%= tasks_total %>
     <% percent = 0 %>
     <% percent = ((tasks_done / tasks_total.to_f)*100).to_i unless tasks_total.zero? %>
     <div class="progress" style="margin-top: 16px">
       <div class="progress-bar" role="progressbar" style="width: <%= percent %>%; background-color: lightgreen; color: black" aria-valuenow="<%= percent %>" aria-valuemin="0" aria-valuemax="100"><b><%= percent %>%</b></div>
     </div>
+  </p>
+
+  <p>
+    <strong><%= t 'change_lang' %>: </strong>
+    <%= link_to 'EN', user_path(current_user, locale: :en) %>
+    <%= link_to 'RU', user_path(current_user, locale: :ru) %>
   </p>
 
 </div>

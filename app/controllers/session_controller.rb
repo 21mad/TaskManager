@@ -10,9 +10,9 @@ class SessionController < ApplicationController
       redirect_to root_path
     else
       if user.nil?
-        flash[:notice] = 'There is no such user.'
+        flash[:notice] = t('no_user')
       else
-        flash[:notice] = 'Wrong password.'
+        flash[:notice] = t('wrong_pass')
       end
       p flash[:notice]
       redirect_to session_login_path
