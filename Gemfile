@@ -57,6 +57,9 @@ group :development, :test do
   gem "bcrypt", "~> 3.1.7"
   gem 'selenium-webdriver'
   gem 'webdrivers', '~> 5.0'
+  gem 'capybara'
+  gem 'shoulda-matchers'
+  gem 'faker'
 end
 
 group :development do

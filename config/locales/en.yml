@@ -108,7 +108,7 @@ en:
   folder_name_not_empty: "Folder name cannot be empty."
   wrong_colors: "Wrong color settings."
   folder_was_updated: "Folder was successfully updated."
-  folder_was_detroyed: "Folder was successfully destroyed."
+  folder_was_destroyed: "Folder was successfully destroyed."
   
   current_progress: "Current progress"
   write_task: "Write your task here..."
