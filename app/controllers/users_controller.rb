@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
+# Users Controller
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[ show edit update destroy ]
-  before_action :check_access, only: %i[ show edit update destroy] # редирект если current_user не админ и не set_user
-  before_action :stay_admin, only: :destroy # нельзя удалить аккаунт админа
+  before_action :set_user, only: %i[show edit update destroy]
+  before_action :check_access, only: %i[show edit update destroy]
+  before_action :stay_admin, only: :destroy # cant destroy admin
   skip_before_action :require_login, only: %i[create new]
-  # добавить проверку на админа для users, админ должен иметь доступ ко всему
-  # запретить дефолтным юзерам index, проверять users/id + users/id/edit (как с folder'ами)
 
   # GET /users or /users.json
   def index
@@ -24,8 +25,7 @@ class UsersController < ApplicationController
   end
 
   # GET /users/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /users or /users.json
   def create
@@ -44,15 +44,15 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     @folders = Folder.where(user_id: current_user.id)
-      if @user.update(user_params)
-        redirect_to user_url(@user), notice: t('user_was_updated')
-      elsif !current_user.nil?
-        flash[:error] = 'The task title and deadline cannot be empty :('
-        # redirect_to user_url(@user) , status: :unprocessable_entity
-        render :show, status: :unprocessable_entity
-      else 
-        redirect_to new_user_path, status: :unprocessable_entity
-      end
+    if @user.update(user_params)
+      redirect_to user_url(@user), notice: t('user_was_updated')
+    elsif !current_user.nil?
+      flash[:error] = 'The task title and deadline cannot be empty :('
+      # redirect_to user_url(@user) , status: :unprocessable_entity
+      render :show, status: :unprocessable_entity
+    else
+      redirect_to new_user_path, status: :unprocessable_entity
+    end
   end
 
   # DELETE /users/1 or /users/1.json
@@ -65,21 +65,22 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def user_params
-      params.require(:user).permit(:username, :password, :password_confirmation, :email)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    def check_access
-      redirect_to root_path if (current_user.id != 6)&&(current_user != set_user)
-    end
+  # Only allow a list of trusted parameters through.
+  def user_params
+    params.require(:user).permit(:username, :password, :password_confirmation, :email)
+  end
 
-    def stay_admin
-      redirect_to user_path, alert: t('uradmin') if current_user.id == 6
-    end
+  def check_access
+    redirect_to root_path if (current_user.id != 6) && (current_user != set_user)
+  end
+
+  def stay_admin
+    redirect_to user_path, alert: t('uradmin') if current_user.id == 6
+  end
 end

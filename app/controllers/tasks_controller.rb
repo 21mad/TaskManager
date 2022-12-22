@@ -1,13 +1,13 @@
+# frozen_string_literal: true
+
+# Tasks Controller
 class TasksController < ApplicationController
-  def index
-  end
+  def index; end
 
-  def new
-  end
+  def new; end
 
-  def show
-  end
-  
+  def show; end
+
   def create
     @task = Task.create(task_params) # same as update
     if @task.save
@@ -24,7 +24,9 @@ class TasksController < ApplicationController
     @task = Task.find(params[:id])
     if @task.update(task_params)
       redirect_to "/#{locale}/folders/#{@task.folder_id}/#row#{@task.id}" unless @task.folder_id.nil? # !same as destroy
-      redirect_to "/#{locale}/public_folders/#{@task.public_folder_id}" unless @task.public_folder_id.nil? # /#row#{@task.id} removed
+      unless @task.public_folder_id.nil?
+        redirect_to "/#{locale}/public_folders/#{@task.public_folder_id}"
+      end # /#row#{@task.id} removed
     else
       redirect_to root_path
     end
@@ -39,7 +41,7 @@ class TasksController < ApplicationController
     elsif !@task.public_folder_id.nil?
       my_path = public_folder_path(@task.public_folder_id)
       public_folder = PublicFolder.find(@task.public_folder_id)
-      if (public_folder.user_id != current_user.id) && (@task.done_by != "")
+      if (public_folder.user_id != current_user.id) && (@task.done_by != '')
         flash[:notice] = t('owner_rule')
         redirect_to "/#{locale}/public_folders/#{@task.public_folder_id}"
         return
